@@ -29,7 +29,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: node --experimental-strip-types scripts/bangun-halaman.ts
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: apps/cek/dist
       - id: penyebaran
