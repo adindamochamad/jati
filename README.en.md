@@ -39,7 +39,7 @@ A matching key that you do not trust:
 pnpm verifikasi -- --ditemukan --sekarang 2026-10-21T12:00:00+07:00
 ```
 
-The result is `Tanda tangan cocok, penerbit belum dikenal.` The exit code is 1.
+The result is `Tanda tangan cocok, penerbit belum dikenal.` The exit code is 3.
 
 The command also reads [fixtures/cabut.json](fixtures/cabut.json). The example id is not on that list, so the success sentence means revocation was checked. Without a list, the result is not a genuine card:
 
@@ -70,7 +70,7 @@ pnpm exec jati terbit --pemilik "PT Uji" --limit 500000
 pnpm exec jati cek kartu.json
 ```
 
-The third command prints `Tanda tangan cocok, penerbit belum dikenal.` The exit code is 1. A key you just created does not turn that name into an identity.
+The third command prints `Tanda tangan cocok, penerbit belum dikenal.` The exit code is 3. A key you just created does not turn that name into an identity.
 
 ```bash
 pnpm exec jati cek kartu.json --percaya
@@ -81,6 +81,8 @@ pnpm exec jati cek kartu.json --percaya
 `jati cek` exit codes: 0 only for `Kartu asli`, 3 for an unrecognized issuer, 1 for every other card result, 2 for a usage error.
 
 `kunci-baru` writes `penerbit.private.jwk.json` and `penerbit.public.jwks.json`. `terbit` writes `kartu.json`, `agen.private.jwk.json`, and an empty `cabut.json` when that file does not yet exist. `cek` does not read the agent private key. Copying `kartu.json` is enough to get the same sentence. `cek` without `cabut.json` prints `Tidak pasti. Pencabutan belum bisa dicek.` A revocation file without `jati` `"0.1"` is rejected. After publication, the same commands run through `npx @adindamochamad/jati`. The package is not published yet.
+
+Public check page: <https://adindamochamad.github.io/jati/>. Timestamp: [v0.1.0, 22 October 2026](https://github.com/adindamochamad/jati/releases/tag/v0.1.0). The tag is not signed.
 
 ## Check page
 
@@ -140,7 +142,7 @@ The KYA statement cited in the spec is the [Komdigi press release of 15 October 
 
 `pnpm terbitkan-contoh` rewrites the example card with keys in `keys/`. That directory is gitignored. Do not copy a private key into another file. The committed JWKS contains only the public `x` component.
 
-`https://adindamochamad.github.io/jati/.well-known/jati.json` is a planned address. The file is not deployed to GitHub Pages yet.
+`https://adindamochamad.github.io/jati/.well-known/jati.json` is deployed. That file is the example key, not a root list. The library does not download it.
 
 ## License
 

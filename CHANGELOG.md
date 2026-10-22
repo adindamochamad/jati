@@ -17,6 +17,7 @@ Formatnya mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ve
 
 - Jati diposisikan sebagai usulan profil KYA untuk Indonesia, bukan format tandingan VC 2.0 dan bukan klaim "yang pertama".
 - Halaman cek menjelaskan bahwa nama pemilik adalah klaim, bukan KTP.
+- Halaman cek terbit di https://adindamochamad.github.io/jati/ . README menyebut kode keluar 3 untuk penerbit yang belum dikenal.
 
 ### Dihapus
 
