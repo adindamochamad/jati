@@ -13,10 +13,16 @@ function cek(judul: string, ok: boolean, petunjuk: string) {
   }
 }
 
-const pub = readFileSync(join(homedir(), ".ssh/id_ed25519.pub"), "utf8").trim();
+const pubPenuh = readFileSync(join(homedir(), ".ssh/id_ed25519.pub"), "utf8").trim();
+const pub = pubPenuh.split(/\s+/).slice(0, 2).join(" ");
 const daftar = spawnSync("gh", ["api", "user/ssh_signing_keys", "--jq", ".[].key"], { encoding: "utf8" });
 const punyaLingkup = daftar.status === 0;
-const kunciTerdaftar = punyaLingkup && daftar.stdout.split("\n").some((baris) => baris.trim() === pub);
+const kunciTerdaftar =
+  punyaLingkup &&
+  daftar.stdout.split("\n").some((baris) => {
+    const kunci = baris.trim();
+    return kunci === pubPenuh || kunci === pub;
+  });
 cek(
   "kunci SSH penanda di GitHub",
   kunciTerdaftar,
