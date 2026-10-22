@@ -39,7 +39,7 @@ Kunci yang cocok tetapi tidak dipercaya:
 pnpm verifikasi -- --ditemukan --sekarang 2026-10-21T12:00:00+07:00
 ```
 
-Hasilnya: `Tanda tangan cocok, penerbit belum dikenal.` Kode keluarnya 1.
+Hasilnya: `Tanda tangan cocok, penerbit belum dikenal.` Kode keluarnya 3.
 
 Perintah itu juga membaca [fixtures/cabut.json](fixtures/cabut.json). Id contoh tidak ada di daftar itu, jadi kalimat sukses berarti pencabutan ikut diperiksa. Tanpa daftar, hasilnya bukan kartu asli:
 
@@ -70,7 +70,7 @@ pnpm exec jati terbit --pemilik "PT Uji" --limit 500000
 pnpm exec jati cek kartu.json
 ```
 
-Hasil perintah ketiga: `Tanda tangan cocok, penerbit belum dikenal.` Kode keluarnya 1. Kunci yang baru Anda buat tidak membuat nama itu menjadi identitas.
+Hasil perintah ketiga: `Tanda tangan cocok, penerbit belum dikenal.` Kode keluarnya 3. Kunci yang baru Anda buat tidak membuat nama itu menjadi identitas.
 
 ```bash
 pnpm exec jati cek kartu.json --percaya
@@ -81,6 +81,8 @@ pnpm exec jati cek kartu.json --percaya
 Kode keluar `jati cek`: 0 hanya untuk `Kartu asli`, 3 untuk `penerbit belum dikenal`, 1 untuk hasil kartu yang lain, 2 untuk kesalahan pemakaian.
 
 `kunci-baru` menulis `penerbit.private.jwk.json` dan `penerbit.public.jwks.json`. `terbit` menulis `kartu.json`, `agen.private.jwk.json`, dan `cabut.json` kosong bila berkas itu belum ada. `cek` tidak membaca kunci privat agen. Menyalin `kartu.json` cukup untuk mendapat kalimat yang sama. `cek` tanpa `cabut.json` menulis `Tidak pasti. Pencabutan belum bisa dicek.` Berkas cabut tanpa `jati` `"0.1"` ditolak. Setelah paket diterbitkan, perintah yang sama berjalan lewat `npx @adindamochamad/jati`. Paket itu belum diterbitkan.
+
+Halaman cek publik: <https://adindamochamad.github.io/jati/>. Cap waktu: [v0.1.0, 22 Oktober 2026](https://github.com/adindamochamad/jati/releases/tag/v0.1.0). Tag itu belum ditandatangani.
 
 ## Halaman cek
 
@@ -140,7 +142,7 @@ Pernyataan KYA yang dirujuk ada di [siaran pers Komdigi, 15 Oktober 2026](https:
 
 `pnpm terbitkan-contoh` menulis ulang kartu contoh dengan kunci di `keys/`. Direktori itu diabaikan git. Jangan menyalin kunci privat ke berkas lain. JWKS yang di-commit hanya memuat komponen publik `x`.
 
-URL `https://adindamochamad.github.io/jati/.well-known/jati.json` adalah alamat yang direncanakan. Berkasnya belum dipasang di GitHub Pages.
+URL `https://adindamochamad.github.io/jati/.well-known/jati.json` sudah terpasang. Berkas itu kunci contoh, bukan daftar akar. Pustaka tidak mengunduhnya.
 
 ## Lisensi
 

@@ -132,7 +132,7 @@ Five cases for other implementations are in [vectors/v0.1.json](vectors/v0.1.jso
 }
 ```
 
-The `penerbit` and `pencabutan` URLs are planned addresses. In v0.1 the example is checked with the local JWKS file. The library does not download those URLs.
+The `penerbit` and `pencabutan` URLs are deployed on GitHub Pages. In v0.1 the example is still checked with the local JWKS file. The library does not download those URLs.
 
 ## 6. Canonicalization and signature
 
@@ -168,7 +168,7 @@ An issuer JWKS is an object `{"keys":[...]}`. Each key that is used MUST have:
 
 A `kid` MUST be unique inside one JWKS. The private component `d` MUST NOT appear in a published JWKS.
 
-The planned location for this example is `https://adindamochamad.github.io/jati/.well-known/jati.json`. The v0.1 library does not fetch that file. The verifier supplies a JWKS it already trusts, or a JWKS it has found and does not yet trust. The `penerbit` URL is a hint, not a trust decision.
+This example file is at `https://adindamochamad.github.io/jati/.well-known/jati.json`. The v0.1 library does not fetch that file. The verifier supplies a JWKS it already trusts, or a JWKS it has found and does not yet trust. The `penerbit` URL is a hint, not a trust decision.
 
 Checking a card answers at most two of three questions. The third is not in the card.
 
