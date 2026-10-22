@@ -28,4 +28,4 @@ Perbaikan celah tidak menunggu 7 hari. Lihat `SECURITY.md`.
 
 ## Tag
 
-Rilis yang ditujukan ke publik memakai tag git yang ditandatangani (`git tag -s` atau tag SSH). Tag itu belum dibuat untuk v0.1.0. Cap waktu ditahan sampai model kepercayaan penerbit, jejak berkas prompt, dan status kebocoran AgentPay tercatat jujur. Lihat `docs/kepercayaan.md`.
+Rilis yang ditujukan ke publik memakai tag git yang ditandatangani (`git tag -s` atau tag SSH). `v0.1.0` adalah cap waktu 22 Oktober 2026 dan tidak ditandatangani. Jangan memindahkannya. `v0.1.1` ditandatangani dengan kunci SSH. Lihat `docs/kepercayaan.md`.

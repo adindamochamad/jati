@@ -82,7 +82,7 @@ Kode keluar `jati cek`: 0 hanya untuk `Kartu asli`, 3 untuk `penerbit belum dike
 
 `kunci-baru` menulis `penerbit.private.jwk.json` dan `penerbit.public.jwks.json`. `terbit` menulis `kartu.json`, `agen.private.jwk.json`, dan `cabut.json` kosong bila berkas itu belum ada. `cek` tidak membaca kunci privat agen. Menyalin `kartu.json` cukup untuk mendapat kalimat yang sama. `cek` tanpa `cabut.json` menulis `Tidak pasti. Pencabutan belum bisa dicek.` Berkas cabut tanpa `jati` `"0.1"` ditolak. Setelah paket diterbitkan, perintah yang sama berjalan lewat `npx @adindamochamad/jati`. Paket itu belum diterbitkan.
 
-Halaman cek publik: <https://adindamochamad.github.io/jati/>. Cap waktu: [v0.1.0, 22 Oktober 2026](https://github.com/adindamochamad/jati/releases/tag/v0.1.0). Tag itu belum ditandatangani.
+Halaman cek publik: <https://adindamochamad.github.io/jati/>. Cap waktu: [v0.1.0, 22 Oktober 2026](https://github.com/adindamochamad/jati/releases/tag/v0.1.0). Tag itu tetap di commit semula dan tidak ditandatangani. [v0.1.1](https://github.com/adindamochamad/jati/releases/tag/v0.1.1) ditandatangani dengan kunci SSH. GitHub menandai tag itu terverifikasi hanya setelah kunci publik yang sama terdaftar sebagai kunci penanda.
 
 ## Halaman cek
 
@@ -118,7 +118,7 @@ Itu menolak kartu kosong, jumlah di atas batas, kartu dicabut, dan kartu kedaluw
 
 | Spec | Pustaka |
 |---|---|
-| 0.1, 22 Oktober 2026 | 0.1.0, belum terbit ke npm |
+| 0.1, 22 Oktober 2026 | 0.1.1, belum terbit ke npm |
 
 Diuji pada 21 Oktober 2026 dengan `canonicalize` 5.1.0, `jose` 6.2.13, dan Node.js 22.18 atau lebih baru. `canonicalize` mengerjakan RFC 8785. `jose` memverifikasi JWS EdDSA; v0.1 tidak menulis kripto sendiri. Skema tetap di [spec/schema/jati-0.1.json](spec/schema/jati-0.1.json) dan diperiksa oleh kode pustaka, tanpa Ajv di runtime, supaya bundle peramban tetap di bawah 30 KB gzip. Ajv hanya dipakai di pemeriksaan skema pada CI. `pnpm ukuran` mencetak angkanya dan gagal bila batas itu terlewati. Pada 21 Oktober 2026 hasilnya 9859 byte gzip. Vektor kanonisasi RFC 8785 bagian 3.2.4 ada di tes. Kompatibilitas W3C VC 2.0 tidak diklaim. Contoh bentuk VC di spec bagian 13 non-normatif.
 

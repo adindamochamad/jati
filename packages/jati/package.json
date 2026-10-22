@@ -1,6 +1,6 @@
 {
   "name": "@adindamochamad/jati",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Terbitkan dan verifikasi kartu Jati v0.1, usulan KYA Indonesia.",
   "license": "MIT",
   "type": "module",
@@ -39,5 +39,8 @@
   "dependencies": {
     "canonicalize": "5.1.0",
     "jose": "6.2.13"
+  },
+  "devDependencies": {
+    "fast-check": "4.10.2"
   }
 }

@@ -4,6 +4,18 @@ Semua perubahan penting proyek ini dicatat di berkas ini.
 
 Formatnya mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versi proyek memakai [Semantic Versioning](https://semver.org/lang/id/).
 
+## [0.1.1] - 2026-10-22
+
+### Ditambahkan
+
+- Uji fuzz 1000 masukan acak pada `verifikasi`.
+- `pnpm uji-akses` menjalankan axe-core pada halaman cek.
+
+### Diubah
+
+- Tag `v0.1.1` ditandatangani dengan kunci SSH. `v0.1.0` tetap cap waktu dan tidak dipindah.
+- Actions di CI, halaman, dan rilis naik ke checkout 7, setup-node 7, dan pnpm/action-setup 6.
+
 ## [Unreleased]
 
 ### Ditambahkan
