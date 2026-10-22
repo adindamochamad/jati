@@ -132,7 +132,7 @@ Lima kasus untuk implementasi lain ada di [vectors/v0.1.json](vectors/v0.1.json)
 }
 ```
 
-URL `penerbit` dan `pencabutan` adalah alamat yang direncanakan. Pada v0.1, contoh diperiksa dengan berkas JWKS lokal. Pustaka tidak mengunduh URL itu.
+URL `penerbit` dan `pencabutan` sudah terpasang di GitHub Pages. Pada v0.1, contoh tetap diperiksa dengan berkas JWKS lokal. Pustaka tidak mengunduh URL itu.
 
 ## 6. Kanonisasi dan tanda tangan
 
@@ -168,7 +168,7 @@ JWKS penerbit adalah objek `{"keys":[...]}`. Setiap kunci yang dipakai **HARUS**
 
 `kid` di dalam satu JWKS **HARUS** unik. Komponen privat `d` **TIDAK BOLEH** ada di JWKS yang diterbitkan.
 
-Lokasi yang direncanakan untuk contoh ini adalah `https://adindamochamad.github.io/jati/.well-known/jati.json`. Pustaka v0.1 tidak mengambil berkas itu. Pemeriksa memasok JWKS yang sudah ia percayai, atau JWKS yang baru ditemukan dan belum dipercaya. URL `penerbit` adalah petunjuk, bukan keputusan kepercayaan.
+Berkas contoh ini ada di `https://adindamochamad.github.io/jati/.well-known/jati.json`. Pustaka v0.1 tidak mengambil berkas itu. Pemeriksa memasok JWKS yang sudah ia percayai, atau JWKS yang baru ditemukan dan belum dipercaya. URL `penerbit` adalah petunjuk, bukan keputusan kepercayaan.
 
 Pemeriksaan kartu menjawab paling banyak dua dari tiga pertanyaan. Yang ketiga tidak ada di dalam kartu.
 

@@ -40,8 +40,8 @@ Dokumen tata kelola ada: `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CODE
 - Quickstart belum diukur stopwatch oleh orang baru. `docs/uji-adopsi.md` masih tabel kosong.
 - Tes Playwright yang memantau jaringan belum ada. Pemeriksaan jaringan di atas adalah sesi peramban manual.
 - Lighthouse dan axe belum dijalankan. Angka aksesibilitas tidak diklaim. Tes tiga detik ke tiga orang non-teknis belum dilakukan.
-- GitHub Pages dipasang lewat workflow `halaman` dari `apps/cek/dist`, termasuk `.well-known/jati.json`. Discussions dan secret scanning GitHub belum dikonfirmasi. Gitleaks ada di CI.
-- Workflow npm provenance ada dan belum pernah dijalankan. Jangan menganggap paket sudah terbit.
+- GitHub Pages hidup di https://adindamochamad.github.io/jati/ sejak 22 Oktober 2026. Kartu contoh lolos di halaman itu. `.well-known/jati.json` adalah kunci contoh, bukan daftar akar. Discussions dan secret scanning GitHub belum dikonfirmasi. Gitleaks ada di CI.
+- Workflow `rilis` sudah dijalankan pada tag `v0.1.0`. Langkah `npm publish` dilewati karena `NPM_TOKEN` kosong. Jangan menganggap paket sudah terbit.
 - `.env.production` AgentPay sudah tidak ada di ujung `main` sejak commit `a764553` (22 Oktober 2026). Riwayat commit sebelumnya dan fork `PascalBurume/AgentPay` masih memuat blob yang sama. Force-push belum dilakukan. Jati tidak menautkan AgentPay dan tidak menyediakan demo pembayaran. Lihat `docs/kepercayaan.md`.
 - `docs/implementasi.md` tidak mendaftar pengguna. Lencana di `docs/lencana.md` belum diterbitkan dan bukan sertifikasi.
 - Video demo belum ada.
