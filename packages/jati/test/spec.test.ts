@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 
 function baca(nama: string): string {
@@ -38,7 +38,7 @@ test("daftar cabut contoh sama dengan spec", () => {
   }
 });
 
-test("spec menutup empat keputusan v0.1", () => {
+test("spec menutup keputusan v0.1 yang sudah ada", () => {
   const indonesia = baca("spec/kya-v0.1.md");
   const inggris = baca("spec/kya-v0.1.en.md");
   assert.match(indonesia, /Tidak ada toleransi jam/);
@@ -54,6 +54,29 @@ test("spec menutup empat keputusan v0.1", () => {
 test("spec menolak klaim regulasi", () => {
   const indonesia = baca("spec/kya-v0.1.md");
   const inggris = baca("spec/kya-v0.1.en.md");
-  assert.match(indonesia, /Usulan terbuka komunitas\. Bukan regulasi\. Bukan standar resmi Komdigi\./);
-  assert.match(inggris, /A community proposal\. Not a regulation\. Not an official Komdigi standard\./);
+  assert.match(indonesia, /Usulan profil KYA untuk Indonesia\. Bukan regulasi\. Bukan standar resmi Komdigi\./);
+  assert.match(inggris, /A proposed KYA profile for Indonesia\. Not a regulation\. Not an official Komdigi standard\./);
+});
+
+test("berkas prompt tidak ada di pohon kerja", () => {
+  for (const nama of ["kya-cursor-prompt.md", "kya-cursor-prompt 2.md", "jati-dod-tambahan.md"]) {
+    assert.equal(existsSync(new URL(`../../../${nama}`, import.meta.url)), false, nama);
+  }
+});
+
+test("spec memisahkan keutuhan, pengenalan penerbit, dan ikatan identitas", () => {
+  const indonesia = baca("spec/kya-v0.1.md");
+  const inggris = baca("spec/kya-v0.1.en.md");
+  assert.match(indonesia, /usulan profil KYA/);
+  assert.match(inggris, /proposed KYA profile/);
+  assert.match(indonesia, /bukan klaim "yang pertama"/);
+  assert.match(inggris, /not a claim of being first/);
+  assert.match(indonesia, /\*\*Ikatan identitas\.\*\*/);
+  assert.match(inggris, /\*\*Identity binding\.\*\*/);
+  assert.match(indonesia, /Kartu mandiri/);
+  assert.match(inggris, /Self-issued card/);
+  assert.match(indonesia, /TIDAK BOLEH\*\* menulis `Kartu asli` untuk kartu mandiri/);
+  assert.match(inggris, /MUST NOT write `Kartu asli` for a self-issued card/);
+  assert.match(indonesia, /bukan sistem identitas/);
+  assert.match(inggris, /not an identity system/);
 });

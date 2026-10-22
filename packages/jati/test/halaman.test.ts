@@ -25,6 +25,10 @@ test("halaman cek tetap di origin sendiri", () => {
   assert.doesNotMatch(halaman, /dicabut\?: unknown/);
   assert.match(halaman, /Daftar origin ini yang dipakai/);
   assert.match(halaman, /This origin's list was used/);
+  assert.match(halaman, /bukan daftar akar/);
+  assert.match(halaman, /not a root list/);
+  assert.match(halaman, /Nama pemilik adalah klaim, bukan KTP/);
+  assert.match(halaman, /The owner name is a claim, not an ID card/);
   assert.match(halaman, /Menyalin berkas kartu cukup/);
   assert.match(halaman, /Copying the card file is enough/);
   assert.match(html, /id="jumlah"/);

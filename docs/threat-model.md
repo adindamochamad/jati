@@ -1,12 +1,16 @@
 # Model ancaman v0.1
 
-Jati memeriksa apakah sebuah kartu utuh, masih dalam masa berlaku, dan ada atau tidak di daftar cabut yang diberikan pemeriksa. Jati tidak membuktikan bahwa agennya aman, dan tidak membuktikan bahwa pembawa kartu memegang kunci privat agen.
+Jati memeriksa apakah sebuah kartu utuh, masih dalam masa berlaku, dan ada atau tidak di daftar cabut yang diberikan pemeriksa. Jati tidak membuktikan bahwa nama pemilik sudah diikat, tidak membuktikan bahwa agennya aman, dan tidak membuktikan bahwa pembawa kartu memegang kunci privat agen.
 
 ## Pemalsuan kartu
 
 Penyerang mengubah field lalu memakai tanda tangan lama. Pemeriksa menghitung ulang kanonisasi RFC 8785 dan menolak bila byte payload tidak sama. Header selain persis `{"alg":"EdDSA","kid":"..."}` ditolak, termasuk `none`.
 
 Yang tidak ditutup: menyalin kartu utuh. Menyalin bukan pemalsuan field. Bukti pegang kunci agen ada di luar v0.1. `cek` tidak membaca kunci privat agen, dan kalimat sukses tidak berubah karena berkas kunci itu ada.
+
+## Klaim pemilik palsu
+
+Penyerang membuat kunci sendiri, menulis `pemilik.nama` apa pun, menandatangani, dan menunjukkan kartu. Tanda tangan sah. Jika pemeriksa menaruh kunci itu di `jwksTepercaya`, hasilnya `Kartu asli`. Mitigasi v0.1: CLI tidak mempercayai kunci di samping kartu; `--percaya` harus dinyatakan tegas. Pemeriksa hanya menaruh kunci penerbit yang sudah diikat di luar kartu. Tanpa daftar tepercaya, format ini tidak membuktikan identitas. Lihat spec bagian 7.
 
 ## Kunci penerbit bocor
 

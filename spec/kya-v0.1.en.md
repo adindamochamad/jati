@@ -2,12 +2,12 @@
 
 SPDX-License-Identifier: CC-BY-4.0
 
-**A community proposal. Not a regulation. Not an official Komdigi standard.**
+**A proposed KYA profile for Indonesia. Not a regulation. Not an official Komdigi standard.**
 
 | | |
 |---|---|
 | Version | 0.1 |
-| Date | 21 October 2026 |
+| Date | 22 October 2026 |
 | Editor | Adinda Panca Mochamad |
 | Normative language | Indonesian. This English text follows [spec/kya-v0.1.md](kya-v0.1.md). If they differ, the Indonesian text wins. |
 | License | [CC-BY 4.0](LICENSE) |
@@ -17,15 +17,17 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## 1. Status and abstract
 
-Jati is a card format for AI agents. One card says who owns the agent, what the agent may do, the rupiah spending limits, who is accountable, how long the card lasts, and where the revocation list is.
+Jati is a proposed KYA (Know Your Agent) profile for Indonesia. The profile uses Indonesian field names and maps onto W3C Verifiable Credentials 2.0 terms. Jati is not a competing format against VC, Visa TAP, or Google AP2.
 
-The card is signed with Ed25519. A verifier can tell an intact card from one that was altered, is not yet valid, has expired, or has been revoked.
+One card carries claims: who owns the agent, what the agent may do, the rupiah spending limits, who is accountable, how long the card lasts, and where the revocation list is.
 
-The signature shows that the issuer key wrote those fields. It does not show that the agent is safe, it does not show that the presenter holds the agent private key, and it does not make Jati a government rule.
+The card is signed with Ed25519. A verifier can tell an intact card from one that was altered, is not yet valid, has expired, has been revoked, or was signed by a key the verifier does not recognize.
+
+The signature shows that the issuer key wrote those fields. It does not show that `pemilik.nama` is a bound identity, it does not show that the agent is safe, it does not show that the presenter holds the agent private key, and it does not make Jati a government rule. Without an issuer the verifier already trusts outside the card, Jati is only a claim label. See section 7.
 
 On 15 October 2026, Vice Minister of Communication and Digital Nezar Patria said, in a Komdigi press release: "Bukan lagi KYC, Know Your Customer, tapi harus ada KYA, Know Your Agent." The same release says that the use of AI agents needs to be accompanied by an understanding of identity, ownership, and the limits of their authority, and it quotes: "Masukan tersebut diperlukan untuk membantu mengidentifikasi risiko dan mendalami kebutuhan pengaturan teknis seiring perkembangan AI." Source: <https://portal.komdigi.go.id/kanal-publik/berita-kini/10603>. Jati maps those three points onto card fields. Jati is a community submission, not a Komdigi document.
 
-A search on 21 October 2026 did not find an open Indonesian-language KYA card format. That is a search result, not proof that no other format exists. International formats are listed in section 12.
+A search on 21 October 2026 did not find an open Indonesian-language KYA card format. That is a search result, not proof that no other format exists, and not a claim of being first. The term KYA is already used abroad. Comparison formats are listed in section 12.
 
 ## 2. Terminology
 
@@ -36,6 +38,9 @@ A search on 21 October 2026 did not find an open Indonesian-language KYA card fo
 - **Accountable party**: the party to contact if the agent acts outside its limits.
 - **Verifier**: the party that checks the card before accepting an action.
 - **kid**: the issuer key name in the JWS header and in the JWKS.
+- **Self-issued card**: a card signed by a key the user just created, usually with `jati kunci-baru`.
+- **Trust list**: the JWKS the verifier already chose outside the card (`jwksTepercaya`).
+- **Identity binding**: the issuer's procedure for checking the owner before signing. That binding is not a v0.1 card field.
 
 ## 3. Six questions
 
@@ -165,6 +170,20 @@ A `kid` MUST be unique inside one JWKS. The private component `d` MUST NOT appea
 
 The planned location for this example is `https://adindamochamad.github.io/jati/.well-known/jati.json`. The v0.1 library does not fetch that file. The verifier supplies a JWKS it already trusts, or a JWKS it has found and does not yet trust. The `penerbit` URL is a hint, not a trust decision.
 
+Checking a card answers at most two of three questions. The third is not in the card.
+
+1. **Integrity.** Did this key sign these fields? That is the signature check.
+2. **Issuer recognition.** Has the verifier already put this key on the trust list, outside the card? That is `jwksTepercaya` versus `jwksDitemukan`.
+3. **Identity binding.** Did the issuer, before signing, check that `pemilik` is the person or company named? That is issuer procedure. A PSrE, BSrE, marketplace, bank, or the verifier's own issuance desk can fill that role. v0.1 has no field for it, and no national root list.
+
+`Kartu asli` may only come from layers 1 and 2. The name in the sentence is a signed claim. Anyone who creates their own key can write any `pemilik.nama`. A verifier that puts that key in `jwksTepercaya` is saying it trusts the issuer, not that the state or a PSrE bound the name.
+
+`jati kunci-baru` then `jati terbit` makes a self-issued card. That is a format test. The reference implementation MUST NOT write `Kartu asli` for a self-issued card unless the caller explicitly says it trusts that key (`--percaya` on the CLI, or `jwksTepercaya` in the API). Without that statement, the result MUST be `penerbit_belum_dikenal`. A JWKS sitting next to the card is not a trust list. Downloading a JWKS from the `penerbit` URL is not one either.
+
+v0.1 ships no root list. A verifier MUST build its own trust list. The keys that SHOULD go on that list are only issuer keys the verifier already knows outside the card, and that have an identity-binding procedure the verifier accepts, or that belong to the verifier's own issuance desk.
+
+Plausible Indonesian issuers, not bound in v0.1: a PSrE, a BSrE, a marketplace, a bank, or an institution that already checked the owner. Whether a PSrE or BSrE certificate can be used directly as a Jati Ed25519 key has not been checked. Until such an issuer exists, Jati is a signed-claim format, not an identity system.
+
 ## 8. Verification rules
 
 A verifier MUST stop at the first failure, in this order.
@@ -240,7 +259,7 @@ The Indonesian sentences below are normative for the reference implementation. `
 
 Rupiah is written with no space and no cents, with a dot as the thousands separator: `Rp300.000`. Dates use the abbreviations Jan, Feb, Mar, Apr, Mei, Jun, Jul, Agu, Sep, Okt, Nov, Des. The section 5 example produces: `Kartu asli. Pemilik: PT Contoh Jaya (fiktif). Berlaku sampai 31 Des 2026.`
 
-"Kartu asli" means the key the verifier trusts signed those fields, the validity window matches, and the id is not in the list the verifier supplied. The name in the sentence is a signed field, not proof the owner is real. The sentence does not prove the agent is safe. Copying the card is enough to get the same sentence. A missing list does not produce "Kartu asli". When the verifier supplies `jumlah`, the section 8 rules also decide the result. Without `jumlah`, spending limits are not checked.
+"Kartu asli" means three things at once: a key on the trust list signed those fields, the validity window matches, and the id is not in the list the verifier supplied. The sentence does NOT mean the owner has been bound as the named person or company. The name in the sentence is a signed field. Anyone can write that name on a self-issued card. A verifier that uses `--percaya` or `jwksTepercaya` is saying it trusts the key, not that a PSrE, marketplace, or bank bound the name. The sentence does not prove the agent is safe. Copying the card is enough to get the same sentence. A missing list does not produce "Kartu asli". When the verifier supplies `jumlah`, the section 8 rules also decide the result. Without `jumlah`, spending limits are not checked.
 
 The reference implementation also fills a stable `kode`, for example `JATI_OK`, `JATI_EXPIRED`, and `JATI_REVOCATION_UNCHECKED`, plus an informative `kalimatEn`. The code and the English sentence are not normative.
 
@@ -249,7 +268,7 @@ The reference implementation also fills a stable `kode`, for example `JATI_OK`, 
 - Issuer private keys and agent private keys must not enter the repository, git history, or a public JWKS.
 - The card is not secret. Copying a card does not prove that the presenter holds the agent private key. Proof of possession is outside v0.1.
 - A verifier MUST reject algorithms other than `EdDSA`, including header `none`.
-- Trust in the issuer key is the verifier's decision. Downloading a JWKS does not by itself make that key trusted.
+- Trust in the issuer key is the verifier's decision. Downloading a JWKS does not by itself make that key trusted. A key the user just created is not trusted by default.
 - The v0.1 revocation list is not signed.
 - The reference library opens no network connection and does not upload the card.
 - Examples in this specification are fictional.
@@ -262,7 +281,7 @@ These items are intentionally not normative yet:
 - Bitstring Status List, SD-JWT, and selective disclosure.
 - ERC-8004 and an on-chain registry.
 - Visa Trusted Agent Protocol and Google AP2 as normative dependencies. A verifier may compare a Jati spending limit with an AP2 mandate. v0.1 defines no mapping.
-- Indonesian PSrE or BSrE certificates. Whether either can be a Jati issuer has not been checked.
+- Identity binding through a PSrE, BSrE, marketplace, or bank. Section 7 explains why that is required. v0.1 ships no root list and does not bind a PSrE or BSrE certificate to a Jati Ed25519 key.
 - A daily spending ledger. The rest of `perHari` still needs `terpakaiHariIni` from the verifier. A `jumlah` already greater than `perHari` is rejected without that ledger.
 - Proof that the presenter controls `agen.kunciPublik`.
 
@@ -276,7 +295,7 @@ Existing formats, listed as comparisons:
 - [knowyouragent.ch verification profile](https://knowyouragent.ch/en/standard/verification-profile).
 - [W3C VC 2.0](https://www.w3.org/TR/vc-data-model-2.0/).
 
-Jati is an open local profile: Indonesian field names, IDR limits, and a result sentence that can be read without a cryptography term on the first line.
+Jati is a proposed KYA profile for Indonesia, not the first KYA format in the world and not a competing format against VC 2.0. The intended extras are Indonesian field names, IDR limits, a ban on national ID numbers and direct contact details on the card in the direction of Law 27 of 2022, a result sentence that can be read without a cryptography term on the first line, and room for AI risk categories in the draft Perpres on AI ethics (low, high, unacceptable) if that rule is issued. The v0.1 JWS envelope is an implementation choice. The meaning of the claims follows the VC model: issuer, subject, validity window, status.
 
 ## 13. VC 2.0 shape example (non-normative)
 

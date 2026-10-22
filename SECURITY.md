@@ -19,4 +19,8 @@ Perbaikan celah tidak menunggu jendela diskusi RFC 7 hari. Lihat `rfcs/0000-temp
 
 ## Di luar laporan
 
-Kartu yang disalin, daftar cabut yang tidak ditandatangani, dan tidak adanya bukti pegang kunci agen adalah batas v0.1, bukan celah yang belum diketahui. Uraiannya ada di `docs/threat-model.md`.
+Kartu yang disalin, daftar cabut yang tidak ditandatangani, tidak adanya bukti pegang kunci agen, dan tidak adanya ikatan identitas di dalam kartu adalah batas v0.1, bukan celah yang belum diketahui. Uraiannya ada di `docs/threat-model.md` dan spec bagian 7.
+
+## Proyek terkait
+
+Jati tidak menautkan AgentPay. `.env.production` masih ada di cabang utama repositori itu per 22 Oktober 2026. Status dan syarat menahan tautan ada di `docs/kepercayaan.md`. Jangan mengirim isi berkas itu ke isu publik.

@@ -8,6 +8,21 @@ Formatnya mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ve
 
 ### Ditambahkan
 
+- Spec bagian 7 memisahkan keutuhan, pengenalan penerbit, dan ikatan identitas. Tanpa penerbit yang diikat di luar kartu, Jati adalah format klaim.
+- `jati cek` tidak mempercayai kunci di samping kartu. `--percaya` harus dinyatakan tegas.
+- `docs/kepercayaan.md` mencatat arti `Kartu asli`, status kebocoran AgentPay, dan penghapusan berkas prompt dari pohon kerja.
+
+### Diubah
+
+- Jati diposisikan sebagai usulan profil KYA untuk Indonesia, bukan format tandingan VC 2.0 dan bukan klaim "yang pertama".
+- Halaman cek menjelaskan bahwa nama pemilik adalah klaim, bukan KTP.
+
+### Dihapus
+
+- Berkas prompt penyusunan draf dihapus dari pohon kerja. Commit awal tetap memuatnya.
+
+### Ditambahkan
+
 - Skema kanonis `spec/schema/jati-0.1.json` dan vektor uji `spec/vectors/v0.1.json` (valid, diubah, kedaluwarsa, dicabut, lewat limit).
 - Build pustaka: ESM, berkas `.d.ts`, dan bundel CJS. `jose` 6 serta `canonicalize` 5 hanya ESM, jadi `require()` memakai bundel.
 - Perintah `jati kunci-baru`, `jati terbit`, dan `jati cek`.
@@ -30,4 +45,4 @@ Formatnya mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ve
 
 ### Ditahan
 
-- Publikasi npm, tag bertanda tangan, dan demo pembayaran. Demo pembayaran tetap ditahan selama berkas lingkungan produksi AgentPay masih ada di cabang utamanya.
+- Publikasi npm, tag bertanda tangan, cap waktu rilis, dan demo pembayaran. Demo pembayaran tetap ditahan selama berkas lingkungan produksi AgentPay masih ada di cabang utamanya. Lihat `docs/kepercayaan.md`.

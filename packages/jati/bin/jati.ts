@@ -163,6 +163,7 @@ async function terbit(opsi: Map<string, string | true>): Promise<void> {
     tulis("cabut.json", { jati: "0.1", dicabut: [] });
     console.error("cabut.json lokal kosong dibuat. Berkas ini bukan layanan pencabutan.\nAn empty local cabut.json was created. It is not a revocation service.");
   }
+  console.error("Kartu mandiri. jati cek tanpa --percaya menulis: Tanda tangan cocok, penerbit belum dikenal.\nSelf-issued card. jati cek without --percaya prints: Tanda tangan cocok, penerbit belum dikenal.");
   console.error("Bawaan fiktif: izin bayar, kontak https://contoh.id/kontak.\nFictional defaults: bayar permission, contact https://contoh.id/kontak.");
   console.error("cek tidak membaca agen.private.jwk.json. Menyalin kartu.json cukup untuk mendapat kalimat yang sama.\ncek does not read agen.private.jwk.json. Copying kartu.json is enough to get the same sentence.");
   console.log(pathKartu);
@@ -190,14 +191,23 @@ async function cek(posisi: readonly string[], opsi: Map<string, string | true>):
   const jumlahTeks = teks(opsi, "--jumlah");
   const terpakaiTeks = teks(opsi, "--terpakai");
   const aksi = teks(opsi, "--aksi");
+  if (opsi.has("--percaya") && opsi.has("--ditemukan")) {
+    gagal("Pakai --percaya atau --ditemukan, jangan keduanya.", "Use --percaya or --ditemukan, not both.");
+  }
+  const percaya = opsi.has("--percaya");
   const hasil = await verifikasi(kartu, {
-    ...(opsi.has("--ditemukan") ? { jwksDitemukan: jwksMentah as JWKS } : { jwksTepercaya: jwksMentah as JWKS }),
+    ...(percaya ? { jwksTepercaya: jwksMentah as JWKS } : { jwksDitemukan: jwksMentah as JWKS }),
     ...(dicabut ? { dicabut } : {}),
     ...(sekarang ? { sekarang } : {}),
     ...(aksi ? { aksi } : {}),
     ...(jumlahTeks ? { jumlah: bilangan(jumlahTeks, "--jumlah") } : {}),
     ...(terpakaiTeks ? { terpakaiHariIni: bilangan(terpakaiTeks, "--terpakai") } : {}),
   });
+  if (percaya && hasil.status === "asli") {
+    console.error(
+      "Anda menyatakan percaya pada kunci ini. Nama pemilik tetap klaim, bukan KTP.\nYou chose to trust this key. The owner name remains a claim, not an identity card.",
+    );
+  }
   console.log(opsi.has("--en") ? hasil.kalimatEn : hasil.kalimat);
   process.exit(hasil.boleh ? 0 : 1);
 }
@@ -212,7 +222,7 @@ if (perintah === "kunci-baru") {
   await cek(posisi.slice(1), opsi);
 } else {
   gagal(
-    "Perintah: jati kunci-baru | jati terbit --pemilik NAMA --limit RUPIAH | jati cek kartu.json",
-    "Commands: jati kunci-baru | jati terbit --pemilik NAME --limit RUPIAH | jati cek card.json",
+    "Perintah: jati kunci-baru | jati terbit --pemilik NAMA --limit RUPIAH | jati cek kartu.json | jati cek kartu.json --percaya",
+    "Commands: jati kunci-baru | jati terbit --pemilik NAME --limit RUPIAH | jati cek card.json | jati cek card.json --percaya",
   );
 }

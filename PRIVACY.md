@@ -1,6 +1,6 @@
 # Privasi
 
-**Usulan terbuka komunitas. Bukan regulasi. Bukan standar resmi Komdigi.**
+**Usulan profil KYA untuk Indonesia. Bukan regulasi. Bukan standar resmi Komdigi.**
 
 Jati v0.1 tidak punya akun, server, atau unggahan.
 
@@ -12,7 +12,7 @@ Jati v0.1 tidak punya akun, server, atau unggahan.
 
 # Privacy
 
-**A community proposal. Not a regulation. Not an official Komdigi standard.**
+**A proposed KYA profile for Indonesia. Not a regulation. Not an official Komdigi standard.**
 
 Jati v0.1 has no accounts, no server, and no uploads.
 

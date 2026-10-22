@@ -16,13 +16,13 @@
   </header>
   <main>
     <h1 id="judul">Cek kartu agen</h1>
-    <p id="pengantar">Tempel JSON, unggah berkas, atau pindai QR. Pemeriksaan berjalan di peramban ini. Kartu tidak dikirim ke server.</p>
+    <p id="pengantar">Tempel JSON, unggah berkas, atau pindai QR. Pemeriksaan berjalan di peramban ini. Kartu tidak dikirim ke server. Kunci yang Anda tempel adalah kunci yang Anda percayai, bukan daftar akar.</p>
     <form id="formulir">
       <label for="kartu" id="label-kartu">Kartu</label>
       <textarea id="kartu" name="kartu" spellcheck="false" required></textarea>
       <label for="berkas-kartu" id="label-berkas">Atau unggah berkas JSON</label>
       <input id="berkas-kartu" name="berkas-kartu" type="file" accept="application/json,.json">
-      <label for="jwks" id="label-jwks">Kunci penerbit yang Anda percayai</label>
+      <label for="jwks" id="label-jwks">Kunci penerbit yang Anda percayai (bukan daftar akar)</label>
       <textarea id="jwks" name="jwks" spellcheck="false" required></textarea>
       <label for="jumlah" id="label-jumlah">Jumlah (opsional)</label>
       <input id="jumlah" name="jumlah" type="text" inputmode="numeric" autocomplete="off" spellcheck="false">
@@ -54,7 +54,7 @@
     </section>
   </main>
   <footer>
-    <p id="kaki">Usulan terbuka komunitas. Bukan regulasi. Bukan standar resmi Komdigi.</p>
+    <p id="kaki">Usulan profil KYA untuk Indonesia. Bukan regulasi. Bukan standar resmi Komdigi.</p>
   </footer>
   <noscript><p>Halaman ini membutuhkan JavaScript untuk memeriksa tanda tangan di peramban Anda.</p></noscript>
   <script type="module" src="/aplikasi.js"></script>

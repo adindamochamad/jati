@@ -33,13 +33,35 @@ test("kunci-baru, terbit, dan cek", () => {
       "2026-12-31T23:59:59+07:00",
     ]);
     assert.equal(terbit.status, 0, terbit.stderr);
-    const cek = jalan(dir, ["cek", "kartu.json", "--sekarang", "2026-10-21T12:00:00+07:00"]);
+    assert.match(terbit.stderr, /Kartu mandiri/);
+    const mandiri = jalan(dir, ["cek", "kartu.json", "--sekarang", "2026-10-21T12:00:00+07:00"]);
+    assert.equal(mandiri.status, 1, mandiri.stderr);
+    assert.equal(mandiri.stdout, "Tanda tangan cocok, penerbit belum dikenal.\n");
+    const uji = jalan(dir, [
+      "terbit",
+      "--pemilik",
+      "PT Uji",
+      "--limit",
+      "500000",
+      "--terbit",
+      "2026-10-21T00:00:00+07:00",
+      "--sampai",
+      "2026-12-31T23:59:59+07:00",
+      "--keluar",
+      "uji.json",
+    ]);
+    assert.equal(uji.status, 0, uji.stderr);
+    const cekUji = jalan(dir, ["cek", "uji.json", "--sekarang", "2026-10-21T12:00:00+07:00"]);
+    assert.equal(cekUji.status, 1);
+    assert.equal(cekUji.stdout, "Tanda tangan cocok, penerbit belum dikenal.\n");
+    const cek = jalan(dir, ["cek", "kartu.json", "--percaya", "--sekarang", "2026-10-21T12:00:00+07:00"]);
     assert.equal(cek.status, 0, cek.stderr);
     assert.equal(cek.stdout, "Kartu asli. Pemilik: PT Contoh. Berlaku sampai 31 Des 2026.\n");
-    const tanpa = jalan(dir, ["cek", "kartu.json", "--tanpa-cabut", "--sekarang", "2026-10-21T12:00:00+07:00"]);
+    assert.match(cek.stderr, /Nama pemilik tetap klaim/);
+    const tanpa = jalan(dir, ["cek", "kartu.json", "--percaya", "--tanpa-cabut", "--sekarang", "2026-10-21T12:00:00+07:00"]);
     assert.equal(tanpa.status, 1);
     assert.equal(tanpa.stdout, "Tidak pasti. Pencabutan belum bisa dicek.\n");
-    const inggris = jalan(dir, ["cek", "kartu.json", "--en", "--sekarang", "2026-10-21T12:00:00+07:00"]);
+    const inggris = jalan(dir, ["cek", "kartu.json", "--percaya", "--en", "--sekarang", "2026-10-21T12:00:00+07:00"]);
     assert.equal(inggris.stdout, "Genuine card. Owner: PT Contoh. Valid until 31 Des 2026.\n");
   } finally {
     rmSync(dir, { recursive: true, force: true });

@@ -1,14 +1,16 @@
 # @adindamochamad/jati
 
-Pustaka kartu Jati v0.1. Usulan terbuka komunitas, bukan regulasi.
+Pustaka kartu Jati v0.1. Usulan profil KYA untuk Indonesia, bukan regulasi.
 
 ```bash
 pnpm exec jati kunci-baru
-pnpm exec jati terbit --pemilik "PT Contoh" --limit 500000
+pnpm exec jati terbit --pemilik "PT Uji" --limit 500000
 pnpm exec jati cek kartu.json
 ```
 
-`verifikasi` mengembalikan kalimat, kode, dan status. `Kartu asli` hanya bila daftar `dicabut` diisi. Tanpa daftar, hasilnya `Tidak pasti. Pencabutan belum bisa dicek.` Kalimat itu berarti kunci tepercaya menandatangani field itu, masa berlaku cocok, dan id tidak ada di daftar yang diberikan. Kalimat itu tidak membuktikan pemiliknya nyata atau agennya aman.
+Perintah ketiga menulis `Tanda tangan cocok, penerbit belum dikenal.` `jati cek kartu.json --percaya` baru memakai kunci itu sebagai daftar tepercaya.
+
+`verifikasi` mengembalikan kalimat, kode, dan status. `Kartu asli` hanya bila pemanggil mengisi `jwksTepercaya` dan daftar `dicabut`. Tanpa daftar, hasilnya `Tidak pasti. Pencabutan belum bisa dicek.` Kalimat sukses berarti kunci tepercaya menandatangani field itu, masa berlaku cocok, dan id tidak ada di daftar yang diberikan. Nama pemilik adalah klaim, bukan KTP.
 
 Dependensi runtime:
 

@@ -1,12 +1,10 @@
 # Jati
 
-**Usulan terbuka komunitas. Bukan regulasi. Bukan standar resmi Komdigi.**
+**Usulan profil KYA untuk Indonesia. Bukan regulasi. Bukan standar resmi Komdigi. Belum ada penerbit di luar contoh repositori ini.**
 
-Jati: KTP untuk agen AI. Format terbuka berbahasa Indonesia untuk tahu siapa pemilik agen, apa izinnya, dan siapa yang tanggung jawab.
+Jati adalah format kartu klaim untuk agen AI: siapa pemiliknya, apa izinnya, berapa batas belanjanya, dan siapa yang tanggung jawab. Kartu ditandatangani Ed25519.
 
-Satu kartu menjawab enam hal: pemilik, izin, batas belanja dalam rupiah, penanggung jawab, masa berlaku, dan status pencabutan. Kartu ditandatangani Ed25519.
-
-Tanda tangan membuktikan siapa penerbit dan field apa yang ia tulis. Tanda tangan tidak membuktikan agennya aman.
+Tanda tangan membuktikan kunci mana yang menulis field itu. Tanda tangan tidak membuktikan nama pemilik sudah diikat, dan tidak membuktikan agennya aman. Tanpa penerbit yang dipercaya di luar kartu, ini label klaim, bukan KTP.
 
 [English](README.en.md)
 
@@ -25,7 +23,7 @@ Perintah itu membaca [fixtures/valid.json](fixtures/valid.json) dan kunci publik
 Kartu asli. Pemilik: PT Contoh Jaya (fiktif). Berlaku sampai 31 Des 2026.
 ```
 
-Tidak ada kartu yang dikirim ke jaringan. Berkas JWKS yang Anda sebut diperlakukan sebagai kunci yang Anda percayai.
+Tidak ada kartu yang dikirim ke jaringan. Perintah ini memakai kunci contoh di repositori sebagai daftar tepercaya, karena Anda memilih menjalankannya di sini. Itu bukan daftar akar nasional. Nama PT Contoh Jaya (fiktif) tetap klaim.
 
 Perintah ini memeriksa bentuk, tanda tangan, dan masa berlaku menurut jam mesin Anda. Kartu contoh berlaku sejak 21 Oktober 2026 pukul 00:00 WIB sampai akhir 31 Desember 2026. Sesudah itu kalimat yang benar adalah `Kartu kedaluwarsa.` Untuk mengunci waktu saat uji:
 
@@ -68,9 +66,17 @@ Butuh Node.js 22.18 atau lebih baru. Dari direktori kosong:
 
 ```bash
 pnpm exec jati kunci-baru
-pnpm exec jati terbit --pemilik "PT Contoh" --limit 500000
+pnpm exec jati terbit --pemilik "PT Uji" --limit 500000
 pnpm exec jati cek kartu.json
 ```
+
+Hasil perintah ketiga: `Tanda tangan cocok, penerbit belum dikenal.` Kode keluarnya 1. Kunci yang baru Anda buat tidak membuat nama itu menjadi identitas.
+
+```bash
+pnpm exec jati cek kartu.json --percaya
+```
+
+`--percaya` menyatakan Anda mempercayai kunci di samping kartu. Baru itu kalimatnya `Kartu asli`. Nama pemilik tetap klaim, bukan KTP.
 
 `kunci-baru` menulis `penerbit.private.jwk.json` dan `penerbit.public.jwks.json`. `terbit` menulis `kartu.json`, `agen.private.jwk.json`, dan `cabut.json` kosong bila berkas itu belum ada. `cek` tidak membaca kunci privat agen. Menyalin `kartu.json` cukup untuk mendapat kalimat yang sama. `cek` tanpa `cabut.json` menulis `Tidak pasti. Pencabutan belum bisa dicek.` Berkas cabut tanpa `jati` `"0.1"` ditolak. Setelah paket diterbitkan, perintah yang sama berjalan lewat `npx @adindamochamad/jati`. Paket itu belum diterbitkan.
 
@@ -80,7 +86,7 @@ pnpm exec jati cek kartu.json
 pnpm cek
 ```
 
-Buka alamat yang tercetak. Halaman memakai aset lokal, mengambil daftar cabut hanya dari origin yang sama, dan bisa dipakai luring setelah sekali dibuka. Saat luring, atau bila berkas cabut tidak memuat `jati` `"0.1"`, pencabutan berbunyi belum bisa dicek. Masukkan kartu dengan menempel JSON, mengunggah berkas, atau memindai QR. Jumlah dan pemakaian hari ini opsional. Kosong berarti batas belanja tidak diperiksa. Kalimat sukses bukan bukti pemilik nyata atau agen aman.
+Buka alamat yang tercetak. Halaman memakai aset lokal, mengambil daftar cabut hanya dari origin yang sama, dan bisa dipakai luring setelah sekali dibuka. Saat luring, atau bila berkas cabut tidak memuat `jati` `"0.1"`, pencabutan berbunyi belum bisa dicek. Masukkan kartu dengan menempel JSON, mengunggah berkas, atau memindai QR. Jumlah dan pemakaian hari ini opsional. Kosong berarti batas belanja tidak diperiksa. Kalimat sukses berarti kunci yang Anda tempel menandatangani field itu. Nama pemilik tetap klaim.
 
 ## Cuplikan
 
@@ -102,13 +108,13 @@ Middleware Express/Fastify ada di [examples/middleware/express.ts](examples/midd
 pnpm demo
 ```
 
-Itu menolak kartu kosong, jumlah di atas batas, kartu dicabut, dan kartu kedaluwarsa, lalu menerima satu kartu yang lolos. Ini bukan demo AgentPay. Tautan dan demo pembayaran tetap ditahan selama berkas lingkungan produksi AgentPay masih ada di cabang utamanya.
+Itu menolak kartu kosong, jumlah di atas batas, kartu dicabut, dan kartu kedaluwarsa, lalu menerima satu kartu yang lolos. Ini uji pustaka, bukan produk yang memakai Jati, dan bukan demo AgentPay. Tautan dan demo pembayaran ditahan: lihat [docs/kepercayaan.md](docs/kepercayaan.md).
 
 ## Pustaka
 
 | Spec | Pustaka |
 |---|---|
-| 0.1, 21 Oktober 2026 | 0.1.0, belum terbit ke npm |
+| 0.1, 22 Oktober 2026 | 0.1.0, belum terbit ke npm |
 
 Diuji pada 21 Oktober 2026 dengan `canonicalize` 5.1.0, `jose` 6.2.13, dan Node.js 22.18 atau lebih baru. `canonicalize` mengerjakan RFC 8785. `jose` memverifikasi JWS EdDSA; v0.1 tidak menulis kripto sendiri. Skema tetap di [spec/schema/jati-0.1.json](spec/schema/jati-0.1.json) dan diperiksa oleh kode pustaka, tanpa Ajv di runtime, supaya bundle peramban tetap di bawah 30 KB gzip. Ajv hanya dipakai di pemeriksaan skema pada CI. `pnpm ukuran` mencetak angkanya dan gagal bila batas itu terlewati. Pada 21 Oktober 2026 hasilnya 9859 byte gzip. Vektor kanonisasi RFC 8785 bagian 3.2.4 ada di tes. Kompatibilitas W3C VC 2.0 tidak diklaim. Contoh bentuk VC di spec bagian 13 non-normatif.
 
@@ -118,7 +124,7 @@ pnpm test
 
 ## Pembanding
 
-Jati tidak mengklaim sebagai format KYA pertama di dunia. Pencarian 21 Oktober 2026 tidak menemukan format kartu terbuka berbahasa Indonesia. Itu hasil pencarian, bukan bukti yang lain tidak ada.
+Jati adalah usulan profil KYA untuk Indonesia, bukan format KYA pertama di dunia dan bukan format tandingan W3C VC 2.0. Pencarian 21 Oktober 2026 tidak menemukan format kartu terbuka berbahasa Indonesia. Itu hasil pencarian, bukan bukti yang lain tidak ada.
 
 - [KYA-OS](https://github.com/decentralized-identity/kya-os-mcp/blob/main/SPEC.md)
 - [KYA Manifest](https://open-kya.github.io/kya-standard/spec/index.html)
@@ -142,7 +148,7 @@ Spesifikasi di `spec/`: [CC-BY 4.0](spec/LICENSE).
 
 ## Dokumen
 
-[CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [SECURITY.md](SECURITY.md), [CHANGELOG.md](CHANGELOG.md), [model ancaman](docs/threat-model.md), [keputusan v0.1](docs/keputusan-v0.1.md).
+[CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [SECURITY.md](SECURITY.md), [CHANGELOG.md](CHANGELOG.md), [kepercayaan](docs/kepercayaan.md), [model ancaman](docs/threat-model.md), [keputusan v0.1](docs/keputusan-v0.1.md).
 
 ## Privasi
 

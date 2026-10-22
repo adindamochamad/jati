@@ -1,6 +1,6 @@
 # Kontribusi
 
-Jati adalah usulan terbuka. Bukan regulasi.
+Jati adalah usulan profil KYA untuk Indonesia. Bukan regulasi. Pengelola saat ini satu orang. Template RFC dan isu ada supaya usul tertulis, bukan karena sudah ada dewan atau penerbit.
 
 ## Menjalankan
 
@@ -23,8 +23,9 @@ Perbaikan celah tidak menunggu 7 hari. Lihat `SECURITY.md`.
 - TypeScript `strict`. Jangan menambah `any` pada API publik.
 - Dependensi runtime tetap `canonicalize` dan `jose`, kecuali sebuah RFC mengubah batas itu. Jangan menambah pustaka validasi skema yang menarik bundle melewati 30 KB gzip.
 - Jangan menulis kripto sendiri. Jangan memasukkan kunci privat.
-- Kalimat Indonesia di spec bagian 10 normatif. `Kartu asli` hanya bila daftar cabut sudah ada.
+- Kalimat Indonesia di spec bagian 10 normatif. `Kartu asli` hanya bila daftar cabut sudah ada dan kunci ada di `jwksTepercaya`. `jati cek` tanpa `--percaya` tidak menulis kalimat itu.
+- Jangan mengembalikan berkas prompt (`kya-cursor-prompt*.md`, `jati-dod-tambahan.md`) ke pohon kerja.
 
 ## Tag
 
-Rilis yang ditujukan ke publik memakai tag git yang ditandatangani (`git tag -s` atau tag SSH). Tag itu belum dibuat untuk v0.1.0.
+Rilis yang ditujukan ke publik memakai tag git yang ditandatangani (`git tag -s` atau tag SSH). Tag itu belum dibuat untuk v0.1.0. Cap waktu ditahan sampai model kepercayaan penerbit, jejak berkas prompt, dan status kebocoran AgentPay tercatat jujur. Lihat `docs/kepercayaan.md`.

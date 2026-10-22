@@ -12,6 +12,7 @@ Butuh dua orang yang belum pernah melihat proyek ini, masing-masing pada sistem 
 | Pasang pustaka | | |
 | Buat kunci | | |
 | Terbitkan kartu | | |
+| Cek tanpa --percaya (penerbit belum dikenal) | | |
 | Verifikasi di kode | | |
 | Verifikasi di halaman cek | | |
 | Cabut, lalu lihat hasil dicabut | | |

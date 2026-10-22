@@ -1,7 +1,7 @@
 # Implementasi
 
-Belum ada implementasi yang dilaporkan.
+Belum ada implementasi yang dilaporkan. Belum ada penerbit. Belum ada pemeriksa di luar repositori ini.
 
-Demo lima kasus di repositori ini (`pnpm demo`) adalah uji pustaka, bukan produk yang memakai Jati. AgentPay belum ditautkan dan belum didemo di sini: berkas lingkungan produksinya masih ada di cabang utama repositori itu, dan kuncinya belum ada bukti rotasi.
+Demo lima kasus (`pnpm demo`) adalah uji pustaka, bukan produk yang memakai Jati. AgentPay belum ditautkan: lihat `docs/kepercayaan.md`.
 
 Jangan menambahkan nama pemakai yang tidak ada.

@@ -2,12 +2,12 @@
 
 SPDX-License-Identifier: CC-BY-4.0
 
-**Usulan terbuka komunitas. Bukan regulasi. Bukan standar resmi Komdigi.**
+**Usulan profil KYA untuk Indonesia. Bukan regulasi. Bukan standar resmi Komdigi.**
 
 | | |
 |---|---|
 | Versi | 0.1 |
-| Tanggal | 21 Oktober 2026 |
+| Tanggal | 22 Oktober 2026 |
 | Penyunting | Adinda Panca Mochamad |
 | Bahasa normatif | Indonesia. [Terjemahan Inggris](kya-v0.1.en.md) mengikuti dokumen ini. |
 | Lisensi | [CC-BY 4.0](LICENSE) |
@@ -17,15 +17,17 @@ Kata **HARUS**, **TIDAK BOLEH**, **SEBAIKNYA**, dan **BOLEH** dipakai seperti MU
 
 ## 1. Status dan abstrak
 
-Jati adalah format kartu untuk agen AI. Satu kartu menjawab siapa pemilik agen, apa yang boleh dilakukan agen, berapa batas belanjanya dalam rupiah, siapa yang bertanggung jawab, sampai kapan kartu berlaku, dan di mana daftar pencabutannya berada.
+Jati adalah usulan profil KYA (Know Your Agent) untuk Indonesia. Profil ini memakai field bahasa Indonesia dan dipetakan ke istilah W3C Verifiable Credentials 2.0. Jati bukan format tandingan VC, Visa TAP, atau Google AP2.
 
-Kartu ditandatangani Ed25519. Pemeriksa bisa membedakan kartu yang utuh dari kartu yang diubah, belum berlaku, kedaluwarsa, atau dicabut.
+Satu kartu membawa klaim: siapa pemilik agen, apa yang boleh dilakukan agen, berapa batas belanjanya dalam rupiah, siapa yang bertanggung jawab, sampai kapan kartu berlaku, dan di mana daftar pencabutannya berada.
 
-Tanda tangan membuktikan bahwa pemegang kunci penerbit menulis field-field itu. Tanda tangan tidak membuktikan agennya aman, tidak membuktikan pemegang kartu menguasai kunci agen, dan tidak membuat Jati menjadi aturan pemerintah.
+Kartu ditandatangani Ed25519. Pemeriksa bisa membedakan kartu yang utuh dari kartu yang diubah, belum berlaku, kedaluwarsa, dicabut, atau ditandatangani kunci yang belum dikenal.
+
+Tanda tangan membuktikan bahwa pemegang kunci penerbit menulis field-field itu. Tanda tangan tidak membuktikan bahwa `pemilik.nama` adalah identitas yang sudah diikat, tidak membuktikan agennya aman, tidak membuktikan pemegang kartu menguasai kunci agen, dan tidak membuat Jati menjadi aturan pemerintah. Tanpa penerbit yang pemeriksa percayai di luar kartu, Jati hanya label klaim. Lihat bagian 7.
 
 Pada 15 Oktober 2026, Wakil Menteri Komunikasi dan Digital Nezar Patria berkata, dalam siaran pers Komdigi: "Bukan lagi KYC, Know Your Customer, tapi harus ada KYA, Know Your Agent." Siaran pers yang sama menulis bahwa penggunaan agen AI perlu diikuti pemahaman mengenai identitas, kepemilikan, dan batas kewenangannya, dan mengutip: "Masukan tersebut diperlukan untuk membantu mengidentifikasi risiko dan mendalami kebutuhan pengaturan teknis seiring perkembangan AI." Sumber: <https://portal.komdigi.go.id/kanal-publik/berita-kini/10603>. Jati memetakan tiga hal itu ke field kartu. Jati adalah masukan komunitas, bukan dokumen Komdigi.
 
-Pencarian pada 21 Oktober 2026 tidak menemukan format kartu KYA terbuka berbahasa Indonesia. Itu hasil pencarian, bukan bukti bahwa format lain tidak ada. Format internasional yang sudah ada disebut di bagian 12.
+Pencarian pada 21 Oktober 2026 tidak menemukan format kartu KYA terbuka berbahasa Indonesia. Itu hasil pencarian, bukan bukti bahwa format lain tidak ada, dan bukan klaim "yang pertama". Istilah KYA sudah dipakai di luar negeri. Format pembanding disebut di bagian 12.
 
 ## 2. Terminologi
 
@@ -36,6 +38,9 @@ Pencarian pada 21 Oktober 2026 tidak menemukan format kartu KYA terbuka berbahas
 - **Penanggung jawab** adalah pihak yang dapat dihubungi bila agen bertindak di luar batas.
 - **Pemeriksa** adalah pihak yang memeriksa kartu sebelum menerima suatu aksi.
 - **Kid** adalah nama kunci penerbit di header JWS dan di JWKS.
+- **Kartu mandiri** adalah kartu yang ditandatangani kunci yang baru dibuat pemakai, biasanya dengan `jati kunci-baru`.
+- **Daftar tepercaya** adalah JWKS yang pemeriksa sudah pilih di luar kartu (`jwksTepercaya`).
+- **Ikatan identitas** adalah prosedur penerbit memeriksa pemilik sebelum menandatangani. Ikatan itu tidak ada di dalam kartu v0.1.
 
 ## 3. Enam pertanyaan
 
@@ -165,6 +170,20 @@ JWKS penerbit adalah objek `{"keys":[...]}`. Setiap kunci yang dipakai **HARUS**
 
 Lokasi yang direncanakan untuk contoh ini adalah `https://adindamochamad.github.io/jati/.well-known/jati.json`. Pustaka v0.1 tidak mengambil berkas itu. Pemeriksa memasok JWKS yang sudah ia percayai, atau JWKS yang baru ditemukan dan belum dipercaya. URL `penerbit` adalah petunjuk, bukan keputusan kepercayaan.
 
+Pemeriksaan kartu menjawab paling banyak dua dari tiga pertanyaan. Yang ketiga tidak ada di dalam kartu.
+
+1. **Keutuhan.** Apakah kunci ini menandatangani field ini? Itu yang dicek tanda tangan.
+2. **Pengenalan penerbit.** Apakah pemeriksa sudah memasukkan kunci ini ke daftar tepercaya, di luar kartu? Itu keputusan `jwksTepercaya` lawan `jwksDitemukan`.
+3. **Ikatan identitas.** Apakah penerbit, sebelum menandatangani, sudah memeriksa bahwa `pemilik` adalah orang atau badan usaha yang dimaksud? Itu prosedur penerbit. PSrE, BSrE, marketplace, bank, atau meja penerbitan pemeriksa sendiri bisa mengisi peran ini. v0.1 tidak punya field untuk itu, dan tidak punya daftar akar nasional.
+
+`Kartu asli` hanya boleh keluar dari lapisan 1 dan 2. Nama pada kalimat adalah klaim yang ditandatangani. Siapa pun yang membuat kunci sendiri dapat menulis `pemilik.nama` apa pun. Pemeriksa yang menaruh kunci itu di `jwksTepercaya` menyatakan ia percaya pada penerbit, bukan bahwa negara atau PSrE sudah mengikat nama itu.
+
+Perintah `jati kunci-baru` lalu `jati terbit` membuat kartu mandiri. Itu uji format. Implementasi rujukan **TIDAK BOLEH** menulis `Kartu asli` untuk kartu mandiri kecuali pemanggil secara tegas menyatakan ia percaya pada kunci itu (`--percaya` di CLI, atau `jwksTepercaya` di API). Tanpa pernyataan itu, hasilnya **HARUS** `penerbit_belum_dikenal`. JWKS yang terletak di direktori yang sama dengan kartu **bukan** daftar tepercaya. Mengunduh JWKS dari URL `penerbit` juga bukan.
+
+v0.1 tidak mengirim daftar akar. Pemeriksa **HARUS** menyusun daftar tepercaya sendiri. Kunci yang **SEBAIKNYA** masuk daftar itu hanya kunci penerbit yang dikenal pemeriksa di luar kartu, dan yang punya prosedur ikatan identitas yang pemeriksa terima, atau yang merupakan meja penerbitan milik pemeriksa sendiri.
+
+Calon penerbit yang masuk akal di Indonesia, dan belum diikat ke v0.1: PSrE, BSrE, marketplace, bank, atau instansi yang sudah memeriksa pemilik. Belum diperiksa apakah sertifikat PSrE atau BSrE dapat dipakai langsung sebagai kunci Ed25519 Jati. Sampai ada penerbit seperti itu, Jati adalah format klaim bertanda tangan, bukan sistem identitas.
+
 ## 8. Aturan pemeriksaan
 
 Pemeriksa **HARUS** berhenti pada kegagalan pertama, dalam urutan ini.
@@ -240,7 +259,7 @@ Alasan `tolak`:
 
 Rupiah ditulis tanpa spasi dan tanpa sen, dengan titik sebagai pemisah ribuan: `Rp300.000`. Tanggal memakai singkatan Jan, Feb, Mar, Apr, Mei, Jun, Jul, Agu, Sep, Okt, Nov, Des. Contoh bagian 5 menghasilkan: `Kartu asli. Pemilik: PT Contoh Jaya (fiktif). Berlaku sampai 31 Des 2026.`
 
-"Kartu asli" berarti kunci yang pemeriksa percayai menandatangani field itu, masa berlakunya cocok, dan id-nya tidak ada di daftar yang pemeriksa berikan. Nama pada kalimat adalah field yang ditandatangani, bukan bukti pemiliknya nyata. Kalimat itu tidak membuktikan agennya aman. Menyalin kartu cukup untuk mendapat kalimat yang sama. Daftar yang tidak ada tidak menghasilkan "Kartu asli". Bila pemeriksa mengirim `jumlah`, aturan bagian 8 ikut menentukan hasilnya. Tanpa `jumlah`, batas belanja tidak diperiksa.
+"Kartu asli" berarti tiga hal sekaligus: kunci di daftar tepercaya menandatangani field itu, masa berlakunya cocok, dan id-nya tidak ada di daftar yang pemeriksa berikan. Kalimat itu **TIDAK** berarti pemiliknya sudah diikat sebagai orang atau badan usaha yang tertulis. Nama pada kalimat adalah field yang ditandatangani. Siapa pun dapat menulis nama itu pada kartu mandiri. Pemeriksa yang memakai `--percaya` atau `jwksTepercaya` menyatakan ia percaya pada kunci, bukan bahwa PSrE, marketplace, atau bank sudah mengikat nama itu. Kalimat itu tidak membuktikan agennya aman. Menyalin kartu cukup untuk mendapat kalimat yang sama. Daftar yang tidak ada tidak menghasilkan "Kartu asli". Bila pemeriksa mengirim `jumlah`, aturan bagian 8 ikut menentukan hasilnya. Tanpa `jumlah`, batas belanja tidak diperiksa.
 
 Implementasi rujukan juga mengisi `kode` yang stabil, misalnya `JATI_OK`, `JATI_EXPIRED`, dan `JATI_REVOCATION_UNCHECKED`, plus `kalimatEn` yang informatif. Kode dan kalimat Inggris bukan bagian normatif.
 
@@ -249,7 +268,7 @@ Implementasi rujukan juga mengisi `kode` yang stabil, misalnya `JATI_OK`, `JATI_
 - Kunci privat penerbit dan kunci privat agen tidak boleh masuk repositori, riwayat git, atau JWKS publik.
 - Kartu tidak rahasia. Menyalin kartu tidak membuktikan bahwa pembawa kartu memegang kunci privat agen. Bukti pegang kunci agen ada di luar v0.1.
 - Pemeriksa **HARUS** menolak algoritma selain `EdDSA` dan header `none`.
-- Kepercayaan pada kunci penerbit diputuskan pemeriksa. Mengunduh JWKS dari jaringan tidak otomatis membuat kunci itu dipercaya.
+- Kepercayaan pada kunci penerbit diputuskan pemeriksa. Mengunduh JWKS dari jaringan tidak otomatis membuat kunci itu dipercaya. Kunci yang baru dibuat pemakai tidak otomatis dipercaya.
 - Daftar cabut v0.1 tidak ditandatangani.
 - Pustaka rujukan tidak membuka koneksi jaringan dan tidak mengunggah kartu.
 - Contoh di spesifikasi ini fiktif.
@@ -262,7 +281,7 @@ Hal-hal ini sengaja belum menjadi bagian normatif:
 - Bitstring Status List, SD-JWT, dan selective disclosure.
 - ERC-8004 dan registri on-chain.
 - Visa Trusted Agent Protocol dan Google AP2 sebagai ketergantungan normatif. Batas belanja Jati dapat dibandingkan dengan mandat AP2 oleh pemeriksa, tanpa aturan pemetaan di v0.1.
-- Sertifikat PSrE atau BSrE. Belum diperiksa apakah salah satunya dapat menjadi penerbit Jati.
+- Ikatan identitas lewat PSrE, BSrE, marketplace, atau bank. Bagian 7 menjelaskan mengapa itu diperlukan. v0.1 tidak mengirim daftar akar dan tidak mengikat sertifikat PSrE atau BSrE ke kunci Ed25519.
 - Buku besar belanja harian. Sisa `perHari` tetap membutuhkan `terpakaiHariIni` dari pemeriksa. Jumlah yang sudah lebih besar dari `perHari` ditolak tanpa buku besar itu.
 - Bukti bahwa pembawa kartu menguasai `agen.kunciPublik`.
 
@@ -276,7 +295,7 @@ Pembanding yang sudah ada, dan bukan lawan yang harus dikalahkan:
 - [profil verifikasi knowyouragent.ch](https://knowyouragent.ch/en/standard/verification-profile).
 - [W3C VC 2.0](https://www.w3.org/TR/vc-data-model-2.0/).
 
-Jati adalah profil lokal terbuka: field bahasa Indonesia, batas IDR, dan kalimat hasil yang bisa dibaca tanpa istilah kriptografi di baris pertama.
+Jati adalah usulan profil KYA untuk Indonesia, bukan format KYA pertama di dunia dan bukan format tandingan VC 2.0. Nilai tambah yang dituju: field bahasa Indonesia, batas IDR, larangan NIK dan data kontak langsung di kartu mengikuti arah UU 27 Tahun 2022, kalimat hasil yang bisa dibaca tanpa istilah kriptografi di baris pertama, dan ruang untuk kategori risiko AI pada rancangan Perpres etika AI (rendah, tinggi, tidak dapat diterima) bila aturan itu terbit. Sampul JWS v0.1 adalah pilihan implementasi. Arti klaimnya mengikuti model VC: penerbit, subjek, masa berlaku, status.
 
 ## 13. Contoh bentuk VC 2.0 (non-normatif)
 

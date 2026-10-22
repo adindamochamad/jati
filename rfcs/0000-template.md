@@ -15,7 +15,7 @@ Teks perubahan terhadap spec. Sebut bagian yang terpengaruh.
 ## Proses
 
 1. Buka berkas ini sebagai pull request.
-2. Diskusi tetap terbuka sedikitnya 7 hari. Angka itu target proyek, bukan aturan badan standar.
+2. Diskusi tetap terbuka sedikitnya 7 hari. Angka itu target proyek, bukan aturan badan standar. Pengelola saat ini satu orang. Jendela itu berlaku bila ada diskusi, bukan karena sudah ada dewan.
 3. Keputusan dicatat di bawah: diterima, ditolak, atau ditunda, plus tanggal dan tautan diskusi.
 
 ## Pengecualian celah

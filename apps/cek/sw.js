@@ -1,4 +1,4 @@
-const CACHE = "jati-cek-5";
+const CACHE = "jati-cek-6";
 const ASET = ["/", "/index.html", "/gaya.css", "/aplikasi.js", "/contoh.json", "/jwks.json"];
 
 self.addEventListener("install", (event) => {

@@ -7,5 +7,7 @@ keys/
 *.pem
 .env
 .env.*
+kya-cursor-prompt*.md
+jati-dod-tambahan.md
 .DS_Store
 *.tsbuildinfo
