@@ -5,6 +5,7 @@ import { createRequire } from "node:module";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { verifikasi, type JWKS, type KartuJati, type OpsiVerifikasi } from "../src/index.ts";
+import { assertSpawn } from "./spawn-bantu.ts";
 
 const require = createRequire(import.meta.url);
 const akarPaket = fileURLToPath(new URL("..", import.meta.url));
@@ -30,12 +31,14 @@ test("berkas ESM, CJS, tipe, dan bin ikut terbit", async () => {
   const jalan = spawnSync(process.execPath, [fileURLToPath(new URL("../dist/bin/jati.js", import.meta.url))], {
     encoding: "utf8",
   });
+  assertSpawn(jalan, "dist bin tanpa argumen");
   assert.equal(jalan.status, 2);
   assert.match(jalan.stderr, /kunci-baru/);
   const pak = spawnSync("npm", ["pack", "--dry-run", "--json", "--ignore-scripts"], {
     cwd: akarPaket,
     encoding: "utf8",
   });
+  assertSpawn(pak, "npm pack");
   assert.equal(pak.status, 0, pak.stderr);
   const daftar = JSON.parse(pak.stdout) as { files: { path: string }[] }[];
   const path = daftar[0]?.files.map((berkas) => berkas.path) ?? [];

@@ -5,14 +5,17 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { assertSpawn } from "./spawn-bantu.ts";
 
 const bin = fileURLToPath(new URL("../bin/jati.ts", import.meta.url));
 
 function jalan(cwd: string, args: string[]) {
-  return spawnSync(process.execPath, ["--experimental-strip-types", bin, ...args], {
+  const hasil = spawnSync(process.execPath, ["--experimental-strip-types", bin, ...args], {
     cwd,
     encoding: "utf8",
   });
+  assertSpawn(hasil, `jati ${args.join(" ")}`);
+  return hasil;
 }
 
 test("kunci-baru, terbit, dan cek", () => {

@@ -20,6 +20,15 @@ Formatnya mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ve
 
 ### Ditambahkan
 
+- `docs/akun-github.md` dan `scripts/cek-akun-github.ts` untuk langkah Verified tag dan npm.
+- Seed tetap pada uji fuzz; `assertSpawn` pada tes subprocess.
+
+### Diubah
+
+- Dokumentasi engines: Node 20 tidak didukung; minimum tetap `>=22.18`.
+
+### Ditambahkan (sebelum 0.1.1)
+
 - Spec bagian 7 memisahkan keutuhan, pengenalan penerbit, dan ikatan identitas. Tanpa penerbit yang diikat di luar kartu, Jati adalah format klaim.
 - `jati cek` tidak mempercayai kunci di samping kartu. `--percaya` harus dinyatakan tegas.
 - `jati cek` keluar dengan kode 3 bila penerbit belum dikenal, 0 hanya bila kartu asli.

@@ -14,7 +14,7 @@ Enam keputusan v0.1 tertulis di `spec/kya-v0.1.md`, `spec/kya-v0.1.en.md`, dan `
 
 `pnpm test` pada 21 Oktober 2026: 46 tes lulus, termasuk vektor `spec/vectors/v0.1.json` dan berkas terbit. Typecheck root dan `apps/cek` bersih. Build menghasilkan ESM, `.d.ts`, dan bundel CJS. `pnpm ukuran` mengukur bundel peramban 9859 byte gzip, di bawah 30 KB, dengan 2 dependensi runtime. Skema kanonis ada di `spec/schema/jati-0.1.json`. Pemeriksaan skema di CI meloloskan lima kartu vektor.
 
-Engines tetap `>=22.18`. `canonicalize` 5 menolak Node yang lebih lama, jadi baris DoD Node ≥20 tidak diturunkan.
+Engines tetap `>=22.18` di root dan `packages/jati/package.json`. Node 20 tidak didukung; kegagalan di Node 20 adalah perilaku yang diharapkan karena `canonicalize` 5 menolak Node yang lebih lama.
 
 CLI lokal `kunci-baru`, `terbit`, dan `cek` ada di `packages/jati/bin/jati.ts`. Tes CLI membuat kunci di direktori sementara, memastikan JWKS publik tidak berisi `d`, memastikan `cek` tanpa `--percaya` keluar penerbit belum dikenal, dan memastikan `cek --percaya` tanpa daftar keluar tidak pasti. Paket belum dipublikasikan, jadi `npx @adindamochamad/jati` belum bisa dijalankan orang lain.
 
@@ -33,9 +33,9 @@ Dokumen tata kelola ada: `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CODE
 
 ## Yang belum, dan tidak boleh dicentang
 
-- Tag `v0.1.0` dan GitHub Release adalah cap waktu publik 22 Oktober 2026. Tag itu tidak ditandatangani dan tidak dipindah. `v0.1.1` ditandatangani dengan kunci SSH yang sudah ada di mesin ini. GitHub tidak menandai tag itu terverifikasi selama kunci publik belum terdaftar sebagai kunci penanda: token `gh` saat ini tidak punya lingkup `admin:ssh_signing_key`. DOI belum ada.
-- Cakupan baris dan cabang `src/` diukur 22 Oktober 2026: 96,52% baris dan 91,54% cabang, di atas ambang 90%. `pnpm --filter @adindamochamad/jati test` gagal bila ambang itu turun. `packages/jati/test/fuzz.test.ts` menjalankan 1000 masukan acak `fast-check` ke `verifikasi`. Uji itu lulus pada 22 Oktober 2026.
-- Paket belum diunggah ke npm. Token di `~/.npmrc` ditolak npm dengan HTTP 401 pada 22 Oktober 2026, jadi token itu tidak disalin ke secret repositori. `require()` memakai bundel karena `jose` 6 dan `canonicalize` 5 hanya ESM. Workflow `rilis` membangun `dist` lalu menerbitkan dengan provenance bila `NPM_TOKEN` yang berlaku ada.
+- Tag `v0.1.0` dan GitHub Release adalah cap waktu publik 22 Oktober 2026. Tag itu tidak ditandatangani dan tidak dipindah. `v0.1.1` ditandatangani dengan kunci SSH. Verified di GitHub menunggu pendaftaran kunci penanda; langkah di `docs/akun-github.md`, cek dengan `node --experimental-strip-types scripts/cek-akun-github.ts`. DOI belum ada.
+- Cakupan baris dan cabang `src/` diukur 22 Oktober 2026: 96,52% baris dan 91,54% cabang, di atas ambang 90%. `pnpm --filter @adindamochamad/jati test` gagal bila ambang itu turun. `packages/jati/test/fuzz.test.ts` menjalankan 1000 masukan acak `fast-check` ke `verifikasi` dengan seed tetap `20261022`. Tes subprocess memakai `assertSpawn` agar kegagalan spawn tidak terlihat seperti assertion acak.
+- Paket belum diunggah ke npm (registry 404). Secret `NPM_TOKEN` belum ada di repositori. Token lama di `~/.npmrc` HTTP 401. Setelah token baru: lihat `docs/akun-github.md`, rerun workflow rilis `v0.1.1`. `require()` memakai bundel karena `jose` 6 dan `canonicalize` 5 hanya ESM.
 - `jose` dipakai sebagai pustaka EdDSA. Laporan auditnya belum ditautkan. Kripto tidak ditulis sendiri.
 - Quickstart belum diukur stopwatch oleh orang baru. `docs/uji-adopsi.md` masih tabel kosong.
 - Tes Playwright yang memantau jaringan belum ada. Pemeriksaan jaringan di atas adalah sesi peramban manual.

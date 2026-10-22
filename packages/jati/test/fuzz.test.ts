@@ -18,6 +18,6 @@ test("seribu masukan acak tidak menjatuhkan verifikasi", async () => {
       assert.equal(hasil.boleh, hasil.status === "asli");
       return true;
     }),
-    { numRuns: 1000 },
+    { numRuns: 1000, seed: 20261022 },
   );
 });

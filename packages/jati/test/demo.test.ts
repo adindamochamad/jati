@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { assertSpawn } from "./spawn-bantu.ts";
 
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 
@@ -10,6 +11,7 @@ test("lima kasus lokal", () => {
     cwd: root,
     encoding: "utf8",
   });
+  assertSpawn(hasil, "demo lima kasus");
   assert.equal(hasil.status, 0, hasil.stdout + hasil.stderr);
   assert.match(hasil.stdout, /ok tanpa kartu/);
   assert.match(hasil.stdout, /ok lewat limit/);
@@ -24,6 +26,7 @@ test("cuplikan node memeriksa kartu contoh", () => {
     cwd: root,
     encoding: "utf8",
   });
+  assertSpawn(hasil, "node cek");
   assert.equal(hasil.status, 0, hasil.stderr);
   assert.equal(hasil.stdout, "Kartu asli. Pemilik: PT Contoh Jaya (fiktif). Berlaku sampai 31 Des 2026.\n");
 });

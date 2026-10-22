@@ -5,16 +5,19 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { assertSpawn } from "./spawn-bantu.ts";
 
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 const python = process.env["PYTHON"] ?? "python3";
 
 function pythonCek(kartu: string, jwks: string, sekarang = "2026-10-21T12:00:00+07:00") {
-  return spawnSync(python, ["examples/python/cek.py", kartu, jwks], {
+  const hasil = spawnSync(python, ["examples/python/cek.py", kartu, jwks], {
     cwd: root,
     encoding: "utf8",
     env: { ...process.env, JATI_SEKARANG: sekarang },
   });
+  assertSpawn(hasil, `python cek ${kartu}`);
+  return hasil;
 }
 
 test("cuplikan python memverifikasi tanda tangan contoh", () => {

@@ -18,7 +18,7 @@ Pada 22 Oktober 2026, berkas `.env.production` dihapus dari ujung cabang `main` 
 
 Pengunduhan dari ujung `main` sekarang gagal. Dua hal masih menyisakan berkas yang sama, 750 byte:
 
-1. Riwayat git AgentPay, lewat commit sebelum `a764553`. Isi blob itu diperiksa lagi pada 22 Oktober 2026: 26 baris, semuanya komentar atau kosong. Tidak ada kunci asli, jadi riwayat tidak ditulis ulang dan tidak ada kunci yang diganti.
+1. Riwayat git AgentPay, lewat commit awal `362c3aa` dan commit sebelum `a764553` (`d74e9f9`). Isi blob itu diperiksa lagi pada 22 Oktober 2026: 26 baris, semuanya komentar atau kosong. Tidak ada kunci asli, jadi riwayat tidak ditulis ulang dan tidak ada kunci yang diganti.
 2. Fork publik [PascalBurume/AgentPay](https://github.com/PascalBurume/AgentPay) masih memuat blob yang sama. Pengelola Jati tidak bisa menghapus fork orang lain.
 
 Jati tidak memakai rahasia dari repositori itu, tidak menautkannya sebagai produk, dan tidak menyediakan demo pembayaran. Tautan dan demo tetap ditahan sampai riwayat dan fork itu bersih. Menahan tautan bukan menutup salinan yang masih ada.

@@ -28,4 +28,4 @@ Perbaikan celah tidak menunggu 7 hari. Lihat `SECURITY.md`.
 
 ## Tag
 
-Rilis yang ditujukan ke publik memakai tag git yang ditandatangani (`git tag -s` atau tag SSH). `v0.1.0` adalah cap waktu 22 Oktober 2026 dan tidak ditandatangani. Jangan memindahkannya. `v0.1.1` ditandatangani dengan kunci SSH. Lihat `docs/kepercayaan.md`.
+Rilis yang ditujukan ke publik memakai tag git yang ditandatangani (`git tag -s` atau tag SSH). `v0.1.0` adalah cap waktu 22 Oktober 2026 dan tidak ditandatangani. Jangan memindahkannya. `v0.1.1` ditandatangani dengan kunci SSH. GitHub menandai Verified hanya setelah kunci publik terdaftar sebagai kunci penanda; langkahnya ada di `docs/akun-github.md`. Penerbitan npm memakai secret `NPM_TOKEN`; langkah yang sama di berkas itu.

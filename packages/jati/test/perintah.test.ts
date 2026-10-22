@@ -2,14 +2,17 @@ import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { assertSpawn } from "./spawn-bantu.ts";
 
 const root = fileURLToPath(new URL("../../..", import.meta.url));
 
 function jalankan(args: string[]) {
-  return spawnSync(process.execPath, ["--experimental-strip-types", "scripts/verifikasi.ts", ...args], {
+  const hasil = spawnSync(process.execPath, ["--experimental-strip-types", "scripts/verifikasi.ts", ...args], {
     cwd: root,
     encoding: "utf8",
   });
+  assertSpawn(hasil, `verifikasi ${args.join(" ")}`);
+  return hasil;
 }
 
 test("perintah verifikasi menerima kartu contoh", () => {
