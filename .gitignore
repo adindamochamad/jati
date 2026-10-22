@@ -1,0 +1,11 @@
+node_modules/
+.venv/
+dist/
+coverage/
+keys/
+*.private.jwk.json
+*.pem
+.env
+.env.*
+.DS_Store
+*.tsbuildinfo

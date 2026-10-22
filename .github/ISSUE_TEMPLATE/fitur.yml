@@ -1,0 +1,17 @@
+name: Usul fitur
+description: Usul yang tidak mengubah spec normatif.
+title: "fitur: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: masalah
+    attributes:
+      label: Masalah yang diselesaikan
+    validations:
+      required: true
+  - type: textarea
+    id: usul
+    attributes:
+      label: Usul
+    validations:
+      required: true

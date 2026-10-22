@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://adindamochamad.github.io/jati/schema/jati-0.1.json",
+  "title": "Kartu Jati 0.1",
+  "description": "Kartu agen yang sudah ditandatangani. Usulan terbuka komunitas, bukan regulasi.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "jati",
+    "id",
+    "agen",
+    "pemilik",
+    "izin",
+    "batasBelanja",
+    "penanggungJawab",
+    "terbit",
+    "berlakuSampai",
+    "pencabutan",
+    "penerbit",
+    "tandaTangan"
+  ],
+  "properties": {
+    "jati": { "const": "0.1" },
+    "id": {
+      "type": "string",
+      "pattern": "^urn:jati:[a-z0-9][a-z0-9:-]{0,118}$"
+    },
+    "agen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nama", "kunciPublik"],
+      "properties": {
+        "nama": { "type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]{1,200}$" },
+        "kunciPublik": { "type": "string", "pattern": "^[A-Za-z0-9_-]{43}$" }
+      }
+    },
+    "pemilik": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nama", "jenis", "id"],
+      "properties": {
+        "nama": { "type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]{1,200}$" },
+        "jenis": { "enum": ["orang", "badan_usaha"] },
+        "id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$" }
+      }
+    },
+    "izin": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$" }
+    },
+    "batasBelanja": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mataUang", "perTransaksi", "perHari"],
+      "properties": {
+        "mataUang": { "const": "IDR" },
+        "perTransaksi": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "perHari": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+      }
+    },
+    "penanggungJawab": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nama", "kontak"],
+      "properties": {
+        "nama": { "type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[^\\u0000-\\u001F\\u007F-\\u009F\\u2028\\u2029]{1,200}$" },
+        "kontak": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 500 }
+      }
+    },
+    "terbit": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[+-][0-9]{2}:[0-9]{2}$" },
+    "berlakuSampai": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[+-][0-9]{2}:[0-9]{2}$" },
+    "pencabutan": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 500 },
+    "penerbit": { "type": "string", "pattern": "^https://\\S+$", "maxLength": 500 },
+    "tandaTangan": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+$"
+    }
+  }
+}

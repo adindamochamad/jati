@@ -1,0 +1,29 @@
+name: rilis
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: python3 -m venv .venv && .venv/bin/pip install -q cryptography
+      - run: PYTHON=.venv/bin/python pnpm test
+      - run: test -f packages/jati/dist/src/index.js && test -f packages/jati/dist/src/index.d.ts && test -f packages/jati/dist/cjs/index.cjs && test -f packages/jati/dist/bin/jati.js
+      - run: npm publish --provenance --access public
+        working-directory: packages/jati
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

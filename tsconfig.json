@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
+    "types": ["node"]
+  },
+  "include": [
+    "packages/jati/src/**/*.ts",
+    "packages/jati/bin/**/*.ts",
+    "packages/jati/test/**/*.ts",
+    "examples/**/*.ts",
+    "scripts/**/*.ts"
+  ]
+}

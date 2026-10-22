@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Periksa kartu agen Jati di peramban. Tidak ada unggahan.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob:; media-src 'self' blob:; connect-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+  <title>Cek kartu agen</title>
+  <link rel="stylesheet" href="/gaya.css">
+</head>
+<body>
+  <a class="lompat" id="lompat" href="#kalimat">Langsung ke hasil</a>
+  <header class="kepala">
+    <p class="merek">Jati</p>
+    <button type="button" id="bahasa" aria-pressed="false">English</button>
+  </header>
+  <main>
+    <h1 id="judul">Cek kartu agen</h1>
+    <p id="pengantar">Tempel JSON, unggah berkas, atau pindai QR. Pemeriksaan berjalan di peramban ini. Kartu tidak dikirim ke server.</p>
+    <form id="formulir">
+      <label for="kartu" id="label-kartu">Kartu</label>
+      <textarea id="kartu" name="kartu" spellcheck="false" required></textarea>
+      <label for="berkas-kartu" id="label-berkas">Atau unggah berkas JSON</label>
+      <input id="berkas-kartu" name="berkas-kartu" type="file" accept="application/json,.json">
+      <label for="jwks" id="label-jwks">Kunci penerbit yang Anda percayai</label>
+      <textarea id="jwks" name="jwks" spellcheck="false" required></textarea>
+      <label for="jumlah" id="label-jumlah">Jumlah (opsional)</label>
+      <input id="jumlah" name="jumlah" type="text" inputmode="numeric" autocomplete="off" spellcheck="false">
+      <label for="terpakai" id="label-terpakai">Terpakai hari ini (opsional)</label>
+      <input id="terpakai" name="terpakai" type="text" inputmode="numeric" autocomplete="off" spellcheck="false">
+      <div class="baris">
+        <button type="button" id="contoh">Pakai kartu contoh</button>
+        <button type="button" id="pindai">Pindai QR</button>
+        <button type="submit" id="cek">Cek</button>
+      </div>
+      <label for="berkas-qr" id="label-qr">Atau unggah gambar QR</label>
+      <input id="berkas-qr" name="berkas-qr" type="file" accept="image/*">
+      <video id="kamera" hidden playsinline muted></video>
+      <button type="button" id="berhenti" hidden>Berhenti memindai</button>
+      <p id="bantuan-qr" class="bantuan"></p>
+    </form>
+    <section aria-labelledby="judul-hasil">
+      <h2 id="judul-hasil">Hasil</h2>
+      <p id="kalimat" role="status" aria-live="polite">Hasil muncul di sini.</p>
+      <p id="arti" class="bantuan"></p>
+      <details>
+        <summary id="ringkas">Detail teknis</summary>
+        <dl>
+          <div><dt>Status</dt><dd id="status">—</dd></div>
+          <div><dt>Kode</dt><dd id="kode">—</dd></div>
+          <div><dt id="label-cabut">Pencabutan</dt><dd id="status-cabut">—</dd></div>
+        </dl>
+      </details>
+    </section>
+  </main>
+  <footer>
+    <p id="kaki">Usulan terbuka komunitas. Bukan regulasi. Bukan standar resmi Komdigi.</p>
+  </footer>
+  <noscript><p>Halaman ini membutuhkan JavaScript untuk memeriksa tanda tangan di peramban Anda.</p></noscript>
+  <script type="module" src="/aplikasi.js"></script>
+</body>
+</html>

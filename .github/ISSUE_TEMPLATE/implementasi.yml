@@ -1,0 +1,17 @@
+name: Laporan implementasi
+description: Beri tahu bahwa ada kode lain yang memakai Jati. Jangan mengarang pemakai.
+title: "implementasi: "
+labels: ["implementasi"]
+body:
+  - type: input
+    id: tautan
+    attributes:
+      label: Tautan repositori atau paket
+    validations:
+      required: true
+  - type: textarea
+    id: vektor
+    attributes:
+      label: Vektor uji yang sudah lolos
+    validations:
+      required: true

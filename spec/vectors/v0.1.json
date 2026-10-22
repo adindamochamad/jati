@@ -1,0 +1,232 @@
+{
+  "jati": "0.1",
+  "keterangan": "Vektor uji kartu Jati 0.1 untuk implementasi lain. Kunci privat tidak ikut. sekarang, dicabut, aksi, dan jumlah adalah masukan pemeriksa.",
+  "jwks": {
+    "keys": [
+      {
+        "kty": "OKP",
+        "crv": "Ed25519",
+        "x": "aG-ozMVD3TaByPU_vmT0hGZH3uBgZhG-7j-PcBuPwVw",
+        "kid": "contoh-penerbit-1",
+        "alg": "EdDSA",
+        "use": "sig"
+      }
+    ]
+  },
+  "kasus": [
+    {
+      "nama": "valid",
+      "kartu": {
+        "jati": "0.1",
+        "id": "urn:jati:contoh:agen-001",
+        "agen": {
+          "nama": "Asisten Belanja Contoh",
+          "kunciPublik": "S_m57fiDIsZ__QG4TKQqFZeqNTy7mI5tbdaEJPxcoG8"
+        },
+        "pemilik": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "jenis": "badan_usaha",
+          "id": "CONTOH-123"
+        },
+        "izin": [
+          "baca_katalog",
+          "bayar"
+        ],
+        "batasBelanja": {
+          "mataUang": "IDR",
+          "perTransaksi": 300000,
+          "perHari": 500000
+        },
+        "penanggungJawab": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "kontak": "https://contoh.id/kontak"
+        },
+        "terbit": "2026-10-21T00:00:00+07:00",
+        "berlakuSampai": "2026-12-31T23:59:59+07:00",
+        "pencabutan": "https://adindamochamad.github.io/jati/cabut.json",
+        "penerbit": "https://adindamochamad.github.io/jati/.well-known/jati.json",
+        "tandaTangan": "eyJhbGciOiJFZERTQSIsImtpZCI6ImNvbnRvaC1wZW5lcmJpdC0xIn0.eyJhZ2VuIjp7Imt1bmNpUHVibGlrIjoiU19tNTdmaURJc1pfX1FHNFRLUXFGWmVxTlR5N21JNXRiZGFFSlB4Y29HOCIsIm5hbWEiOiJBc2lzdGVuIEJlbGFuamEgQ29udG9oIn0sImJhdGFzQmVsYW5qYSI6eyJtYXRhVWFuZyI6IklEUiIsInBlckhhcmkiOjUwMDAwMCwicGVyVHJhbnNha3NpIjozMDAwMDB9LCJiZXJsYWt1U2FtcGFpIjoiMjAyNi0xMi0zMVQyMzo1OTo1OSswNzowMCIsImlkIjoidXJuOmphdGk6Y29udG9oOmFnZW4tMDAxIiwiaXppbiI6WyJiYWNhX2thdGFsb2ciLCJiYXlhciJdLCJqYXRpIjoiMC4xIiwicGVtaWxpayI6eyJpZCI6IkNPTlRPSC0xMjMiLCJqZW5pcyI6ImJhZGFuX3VzYWhhIiwibmFtYSI6IlBUIENvbnRvaCBKYXlhIChmaWt0aWYpIn0sInBlbmFuZ2d1bmdKYXdhYiI6eyJrb250YWsiOiJodHRwczovL2NvbnRvaC5pZC9rb250YWsiLCJuYW1hIjoiUFQgQ29udG9oIEpheWEgKGZpa3RpZikifSwicGVuY2FidXRhbiI6Imh0dHBzOi8vYWRpbmRhbW9jaGFtYWQuZ2l0aHViLmlvL2phdGkvY2FidXQuanNvbiIsInBlbmVyYml0IjoiaHR0cHM6Ly9hZGluZGFtb2NoYW1hZC5naXRodWIuaW8vamF0aS8ud2VsbC1rbm93bi9qYXRpLmpzb24iLCJ0ZXJiaXQiOiIyMDI2LTEwLTIxVDAwOjAwOjAwKzA3OjAwIn0.t2-gsTQMCUi4cHlcxVnianpP0QrJgvkmY-hUq5-jPMQpd6-GUm4MM12YFi421PYpyMTYqPqNU8VVqBsiwPIsAg"
+      },
+      "sekarang": "2026-10-21T12:00:00+07:00",
+      "dicabut": [],
+      "harapan": {
+        "boleh": true,
+        "status": "asli",
+        "kode": "JATI_OK",
+        "kalimat": "Kartu asli. Pemilik: PT Contoh Jaya (fiktif). Berlaku sampai 31 Des 2026."
+      }
+    },
+    {
+      "nama": "diubah",
+      "kartu": {
+        "jati": "0.1",
+        "id": "urn:jati:contoh:agen-001",
+        "agen": {
+          "nama": "Asisten Belanja Contoh",
+          "kunciPublik": "S_m57fiDIsZ__QG4TKQqFZeqNTy7mI5tbdaEJPxcoG8"
+        },
+        "pemilik": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "jenis": "badan_usaha",
+          "id": "CONTOH-124"
+        },
+        "izin": [
+          "baca_katalog",
+          "bayar"
+        ],
+        "batasBelanja": {
+          "mataUang": "IDR",
+          "perTransaksi": 300000,
+          "perHari": 500000
+        },
+        "penanggungJawab": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "kontak": "https://contoh.id/kontak"
+        },
+        "terbit": "2026-10-21T00:00:00+07:00",
+        "berlakuSampai": "2026-12-31T23:59:59+07:00",
+        "pencabutan": "https://adindamochamad.github.io/jati/cabut.json",
+        "penerbit": "https://adindamochamad.github.io/jati/.well-known/jati.json",
+        "tandaTangan": "eyJhbGciOiJFZERTQSIsImtpZCI6ImNvbnRvaC1wZW5lcmJpdC0xIn0.eyJhZ2VuIjp7Imt1bmNpUHVibGlrIjoiU19tNTdmaURJc1pfX1FHNFRLUXFGWmVxTlR5N21JNXRiZGFFSlB4Y29HOCIsIm5hbWEiOiJBc2lzdGVuIEJlbGFuamEgQ29udG9oIn0sImJhdGFzQmVsYW5qYSI6eyJtYXRhVWFuZyI6IklEUiIsInBlckhhcmkiOjUwMDAwMCwicGVyVHJhbnNha3NpIjozMDAwMDB9LCJiZXJsYWt1U2FtcGFpIjoiMjAyNi0xMi0zMVQyMzo1OTo1OSswNzowMCIsImlkIjoidXJuOmphdGk6Y29udG9oOmFnZW4tMDAxIiwiaXppbiI6WyJiYWNhX2thdGFsb2ciLCJiYXlhciJdLCJqYXRpIjoiMC4xIiwicGVtaWxpayI6eyJpZCI6IkNPTlRPSC0xMjMiLCJqZW5pcyI6ImJhZGFuX3VzYWhhIiwibmFtYSI6IlBUIENvbnRvaCBKYXlhIChmaWt0aWYpIn0sInBlbmFuZ2d1bmdKYXdhYiI6eyJrb250YWsiOiJodHRwczovL2NvbnRvaC5pZC9rb250YWsiLCJuYW1hIjoiUFQgQ29udG9oIEpheWEgKGZpa3RpZikifSwicGVuY2FidXRhbiI6Imh0dHBzOi8vYWRpbmRhbW9jaGFtYWQuZ2l0aHViLmlvL2phdGkvY2FidXQuanNvbiIsInBlbmVyYml0IjoiaHR0cHM6Ly9hZGluZGFtb2NoYW1hZC5naXRodWIuaW8vamF0aS8ud2VsbC1rbm93bi9qYXRpLmpzb24iLCJ0ZXJiaXQiOiIyMDI2LTEwLTIxVDAwOjAwOjAwKzA3OjAwIn0.t2-gsTQMCUi4cHlcxVnianpP0QrJgvkmY-hUq5-jPMQpd6-GUm4MM12YFi421PYpyMTYqPqNU8VVqBsiwPIsAg"
+      },
+      "sekarang": "2026-10-21T12:00:00+07:00",
+      "dicabut": [],
+      "harapan": {
+        "boleh": false,
+        "status": "diubah",
+        "kode": "JATI_TAMPERED",
+        "kalimat": "Kartu sudah diubah."
+      }
+    },
+    {
+      "nama": "kedaluwarsa",
+      "kartu": {
+        "jati": "0.1",
+        "id": "urn:jati:contoh:agen-001",
+        "agen": {
+          "nama": "Asisten Belanja Contoh",
+          "kunciPublik": "S_m57fiDIsZ__QG4TKQqFZeqNTy7mI5tbdaEJPxcoG8"
+        },
+        "pemilik": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "jenis": "badan_usaha",
+          "id": "CONTOH-123"
+        },
+        "izin": [
+          "baca_katalog",
+          "bayar"
+        ],
+        "batasBelanja": {
+          "mataUang": "IDR",
+          "perTransaksi": 300000,
+          "perHari": 500000
+        },
+        "penanggungJawab": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "kontak": "https://contoh.id/kontak"
+        },
+        "terbit": "2026-10-21T00:00:00+07:00",
+        "berlakuSampai": "2026-12-31T23:59:59+07:00",
+        "pencabutan": "https://adindamochamad.github.io/jati/cabut.json",
+        "penerbit": "https://adindamochamad.github.io/jati/.well-known/jati.json",
+        "tandaTangan": "eyJhbGciOiJFZERTQSIsImtpZCI6ImNvbnRvaC1wZW5lcmJpdC0xIn0.eyJhZ2VuIjp7Imt1bmNpUHVibGlrIjoiU19tNTdmaURJc1pfX1FHNFRLUXFGWmVxTlR5N21JNXRiZGFFSlB4Y29HOCIsIm5hbWEiOiJBc2lzdGVuIEJlbGFuamEgQ29udG9oIn0sImJhdGFzQmVsYW5qYSI6eyJtYXRhVWFuZyI6IklEUiIsInBlckhhcmkiOjUwMDAwMCwicGVyVHJhbnNha3NpIjozMDAwMDB9LCJiZXJsYWt1U2FtcGFpIjoiMjAyNi0xMi0zMVQyMzo1OTo1OSswNzowMCIsImlkIjoidXJuOmphdGk6Y29udG9oOmFnZW4tMDAxIiwiaXppbiI6WyJiYWNhX2thdGFsb2ciLCJiYXlhciJdLCJqYXRpIjoiMC4xIiwicGVtaWxpayI6eyJpZCI6IkNPTlRPSC0xMjMiLCJqZW5pcyI6ImJhZGFuX3VzYWhhIiwibmFtYSI6IlBUIENvbnRvaCBKYXlhIChmaWt0aWYpIn0sInBlbmFuZ2d1bmdKYXdhYiI6eyJrb250YWsiOiJodHRwczovL2NvbnRvaC5pZC9rb250YWsiLCJuYW1hIjoiUFQgQ29udG9oIEpheWEgKGZpa3RpZikifSwicGVuY2FidXRhbiI6Imh0dHBzOi8vYWRpbmRhbW9jaGFtYWQuZ2l0aHViLmlvL2phdGkvY2FidXQuanNvbiIsInBlbmVyYml0IjoiaHR0cHM6Ly9hZGluZGFtb2NoYW1hZC5naXRodWIuaW8vamF0aS8ud2VsbC1rbm93bi9qYXRpLmpzb24iLCJ0ZXJiaXQiOiIyMDI2LTEwLTIxVDAwOjAwOjAwKzA3OjAwIn0.t2-gsTQMCUi4cHlcxVnianpP0QrJgvkmY-hUq5-jPMQpd6-GUm4MM12YFi421PYpyMTYqPqNU8VVqBsiwPIsAg"
+      },
+      "sekarang": "2027-01-01T00:00:00+07:00",
+      "dicabut": [],
+      "harapan": {
+        "boleh": false,
+        "status": "kedaluwarsa",
+        "kode": "JATI_EXPIRED",
+        "kalimat": "Kartu kedaluwarsa."
+      }
+    },
+    {
+      "nama": "dicabut",
+      "kartu": {
+        "jati": "0.1",
+        "id": "urn:jati:contoh:agen-001",
+        "agen": {
+          "nama": "Asisten Belanja Contoh",
+          "kunciPublik": "S_m57fiDIsZ__QG4TKQqFZeqNTy7mI5tbdaEJPxcoG8"
+        },
+        "pemilik": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "jenis": "badan_usaha",
+          "id": "CONTOH-123"
+        },
+        "izin": [
+          "baca_katalog",
+          "bayar"
+        ],
+        "batasBelanja": {
+          "mataUang": "IDR",
+          "perTransaksi": 300000,
+          "perHari": 500000
+        },
+        "penanggungJawab": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "kontak": "https://contoh.id/kontak"
+        },
+        "terbit": "2026-10-21T00:00:00+07:00",
+        "berlakuSampai": "2026-12-31T23:59:59+07:00",
+        "pencabutan": "https://adindamochamad.github.io/jati/cabut.json",
+        "penerbit": "https://adindamochamad.github.io/jati/.well-known/jati.json",
+        "tandaTangan": "eyJhbGciOiJFZERTQSIsImtpZCI6ImNvbnRvaC1wZW5lcmJpdC0xIn0.eyJhZ2VuIjp7Imt1bmNpUHVibGlrIjoiU19tNTdmaURJc1pfX1FHNFRLUXFGWmVxTlR5N21JNXRiZGFFSlB4Y29HOCIsIm5hbWEiOiJBc2lzdGVuIEJlbGFuamEgQ29udG9oIn0sImJhdGFzQmVsYW5qYSI6eyJtYXRhVWFuZyI6IklEUiIsInBlckhhcmkiOjUwMDAwMCwicGVyVHJhbnNha3NpIjozMDAwMDB9LCJiZXJsYWt1U2FtcGFpIjoiMjAyNi0xMi0zMVQyMzo1OTo1OSswNzowMCIsImlkIjoidXJuOmphdGk6Y29udG9oOmFnZW4tMDAxIiwiaXppbiI6WyJiYWNhX2thdGFsb2ciLCJiYXlhciJdLCJqYXRpIjoiMC4xIiwicGVtaWxpayI6eyJpZCI6IkNPTlRPSC0xMjMiLCJqZW5pcyI6ImJhZGFuX3VzYWhhIiwibmFtYSI6IlBUIENvbnRvaCBKYXlhIChmaWt0aWYpIn0sInBlbmFuZ2d1bmdKYXdhYiI6eyJrb250YWsiOiJodHRwczovL2NvbnRvaC5pZC9rb250YWsiLCJuYW1hIjoiUFQgQ29udG9oIEpheWEgKGZpa3RpZikifSwicGVuY2FidXRhbiI6Imh0dHBzOi8vYWRpbmRhbW9jaGFtYWQuZ2l0aHViLmlvL2phdGkvY2FidXQuanNvbiIsInBlbmVyYml0IjoiaHR0cHM6Ly9hZGluZGFtb2NoYW1hZC5naXRodWIuaW8vamF0aS8ud2VsbC1rbm93bi9qYXRpLmpzb24iLCJ0ZXJiaXQiOiIyMDI2LTEwLTIxVDAwOjAwOjAwKzA3OjAwIn0.t2-gsTQMCUi4cHlcxVnianpP0QrJgvkmY-hUq5-jPMQpd6-GUm4MM12YFi421PYpyMTYqPqNU8VVqBsiwPIsAg"
+      },
+      "sekarang": "2026-10-21T12:00:00+07:00",
+      "dicabut": [
+        "urn:jati:contoh:agen-001"
+      ],
+      "harapan": {
+        "boleh": false,
+        "status": "dicabut",
+        "kode": "JATI_REVOKED",
+        "kalimat": "Kartu sudah dicabut."
+      }
+    },
+    {
+      "nama": "lewat-limit",
+      "kartu": {
+        "jati": "0.1",
+        "id": "urn:jati:contoh:agen-001",
+        "agen": {
+          "nama": "Asisten Belanja Contoh",
+          "kunciPublik": "S_m57fiDIsZ__QG4TKQqFZeqNTy7mI5tbdaEJPxcoG8"
+        },
+        "pemilik": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "jenis": "badan_usaha",
+          "id": "CONTOH-123"
+        },
+        "izin": [
+          "baca_katalog",
+          "bayar"
+        ],
+        "batasBelanja": {
+          "mataUang": "IDR",
+          "perTransaksi": 300000,
+          "perHari": 500000
+        },
+        "penanggungJawab": {
+          "nama": "PT Contoh Jaya (fiktif)",
+          "kontak": "https://contoh.id/kontak"
+        },
+        "terbit": "2026-10-21T00:00:00+07:00",
+        "berlakuSampai": "2026-12-31T23:59:59+07:00",
+        "pencabutan": "https://adindamochamad.github.io/jati/cabut.json",
+        "penerbit": "https://adindamochamad.github.io/jati/.well-known/jati.json",
+        "tandaTangan": "eyJhbGciOiJFZERTQSIsImtpZCI6ImNvbnRvaC1wZW5lcmJpdC0xIn0.eyJhZ2VuIjp7Imt1bmNpUHVibGlrIjoiU19tNTdmaURJc1pfX1FHNFRLUXFGWmVxTlR5N21JNXRiZGFFSlB4Y29HOCIsIm5hbWEiOiJBc2lzdGVuIEJlbGFuamEgQ29udG9oIn0sImJhdGFzQmVsYW5qYSI6eyJtYXRhVWFuZyI6IklEUiIsInBlckhhcmkiOjUwMDAwMCwicGVyVHJhbnNha3NpIjozMDAwMDB9LCJiZXJsYWt1U2FtcGFpIjoiMjAyNi0xMi0zMVQyMzo1OTo1OSswNzowMCIsImlkIjoidXJuOmphdGk6Y29udG9oOmFnZW4tMDAxIiwiaXppbiI6WyJiYWNhX2thdGFsb2ciLCJiYXlhciJdLCJqYXRpIjoiMC4xIiwicGVtaWxpayI6eyJpZCI6IkNPTlRPSC0xMjMiLCJqZW5pcyI6ImJhZGFuX3VzYWhhIiwibmFtYSI6IlBUIENvbnRvaCBKYXlhIChmaWt0aWYpIn0sInBlbmFuZ2d1bmdKYXdhYiI6eyJrb250YWsiOiJodHRwczovL2NvbnRvaC5pZC9rb250YWsiLCJuYW1hIjoiUFQgQ29udG9oIEpheWEgKGZpa3RpZikifSwicGVuY2FidXRhbiI6Imh0dHBzOi8vYWRpbmRhbW9jaGFtYWQuZ2l0aHViLmlvL2phdGkvY2FidXQuanNvbiIsInBlbmVyYml0IjoiaHR0cHM6Ly9hZGluZGFtb2NoYW1hZC5naXRodWIuaW8vamF0aS8ud2VsbC1rbm93bi9qYXRpLmpzb24iLCJ0ZXJiaXQiOiIyMDI2LTEwLTIxVDAwOjAwOjAwKzA3OjAwIn0.t2-gsTQMCUi4cHlcxVnianpP0QrJgvkmY-hUq5-jPMQpd6-GUm4MM12YFi421PYpyMTYqPqNU8VVqBsiwPIsAg"
+      },
+      "sekarang": "2026-10-21T12:00:00+07:00",
+      "dicabut": [],
+      "aksi": "bayar",
+      "jumlah": 300001,
+      "harapan": {
+        "boleh": false,
+        "status": "tolak",
+        "kode": "JATI_OVER_TRANSACTION_LIMIT",
+        "kalimat": "Tolak. Jumlah Rp300.001 melewati batas per transaksi Rp300.000."
+      }
+    }
+  ]
+}

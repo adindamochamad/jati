@@ -1,0 +1,18 @@
+name: Laporan bug
+description: Sesuatu tidak berjalan seperti spec.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: langkah
+    attributes:
+      label: Langkah
+      description: Apa yang dijalankan, dan apa yang terjadi.
+    validations:
+      required: true
+  - type: input
+    id: versi
+    attributes:
+      label: Versi atau commit
+    validations:
+      required: true

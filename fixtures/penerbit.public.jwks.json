@@ -1,0 +1,12 @@
+{
+  "keys": [
+    {
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "x": "aG-ozMVD3TaByPU_vmT0hGZH3uBgZhG-7j-PcBuPwVw",
+      "kid": "contoh-penerbit-1",
+      "alg": "EdDSA",
+      "use": "sig"
+    }
+  ]
+}

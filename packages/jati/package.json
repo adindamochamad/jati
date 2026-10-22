@@ -1,0 +1,43 @@
+{
+  "name": "@adindamochamad/jati",
+  "version": "0.1.0",
+  "description": "Terbitkan dan verifikasi kartu Jati v0.1, usulan KYA Indonesia.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "bin": {
+    "jati": "./dist/bin/jati.js"
+  },
+  "main": "./dist/cjs/index.cjs",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/src/index.js"
+      },
+      "require": {
+        "types": "./dist/src/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "pnpm exec tsc -p tsconfig.build.json && node --experimental-strip-types ../../scripts/bangun-cjs.ts",
+    "prepublishOnly": "pnpm run build",
+    "test": "node --experimental-strip-types --test test/*.test.ts"
+  },
+  "dependencies": {
+    "canonicalize": "5.1.0",
+    "jose": "6.2.13"
+  }
+}
