@@ -33,4 +33,4 @@ jobs:
         with:
           path: apps/cek/dist
       - id: penyebaran
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
