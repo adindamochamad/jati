@@ -79,4 +79,6 @@ test("spec memisahkan keutuhan, pengenalan penerbit, dan ikatan identitas", () =
   assert.match(inggris, /MUST NOT write `Kartu asli` for a self-issued card/);
   assert.match(indonesia, /bukan sistem identitas/);
   assert.match(inggris, /not an identity system/);
+  assert.match(indonesia, /keluar dengan kode 3/);
+  assert.match(inggris, /exits 3/);
 });

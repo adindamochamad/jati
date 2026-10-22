@@ -259,6 +259,8 @@ Alasan `tolak`:
 
 Rupiah ditulis tanpa spasi dan tanpa sen, dengan titik sebagai pemisah ribuan: `Rp300.000`. Tanggal memakai singkatan Jan, Feb, Mar, Apr, Mei, Jun, Jul, Agu, Sep, Okt, Nov, Des. Contoh bagian 5 menghasilkan: `Kartu asli. Pemilik: PT Contoh Jaya (fiktif). Berlaku sampai 31 Des 2026.`
 
+Perintah rujukan `jati cek` keluar dengan kode 0 hanya pada status `asli`. Status `penerbit_belum_dikenal` keluar dengan kode 3, supaya skrip tidak menganggapnya lolos. Status kartu yang lain keluar dengan kode 1. Kode 2 adalah kesalahan pemakaian perintah, bukan hasil kartu.
+
 "Kartu asli" berarti tiga hal sekaligus: kunci di daftar tepercaya menandatangani field itu, masa berlakunya cocok, dan id-nya tidak ada di daftar yang pemeriksa berikan. Kalimat itu **TIDAK** berarti pemiliknya sudah diikat sebagai orang atau badan usaha yang tertulis. Nama pada kalimat adalah field yang ditandatangani. Siapa pun dapat menulis nama itu pada kartu mandiri. Pemeriksa yang memakai `--percaya` atau `jwksTepercaya` menyatakan ia percaya pada kunci, bukan bahwa PSrE, marketplace, atau bank sudah mengikat nama itu. Kalimat itu tidak membuktikan agennya aman. Menyalin kartu cukup untuk mendapat kalimat yang sama. Daftar yang tidak ada tidak menghasilkan "Kartu asli". Bila pemeriksa mengirim `jumlah`, aturan bagian 8 ikut menentukan hasilnya. Tanpa `jumlah`, batas belanja tidak diperiksa.
 
 Implementasi rujukan juga mengisi `kode` yang stabil, misalnya `JATI_OK`, `JATI_EXPIRED`, dan `JATI_REVOCATION_UNCHECKED`, plus `kalimatEn` yang informatif. Kode dan kalimat Inggris bukan bagian normatif.

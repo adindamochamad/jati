@@ -23,4 +23,4 @@ Kartu yang disalin, daftar cabut yang tidak ditandatangani, tidak adanya bukti p
 
 ## Proyek terkait
 
-Jati tidak menautkan AgentPay. `.env.production` masih ada di cabang utama repositori itu per 22 Oktober 2026. Status dan syarat menahan tautan ada di `docs/kepercayaan.md`. Jangan mengirim isi berkas itu ke isu publik.
+Jati tidak menautkan AgentPay. `.env.production` sudah dihapus dari ujung `main` repositori itu pada 22 Oktober 2026. Riwayat dan satu fork publik masih memuat berkas itu. Statusnya ada di `docs/kepercayaan.md`. Jangan mengirim isi berkas itu ke isu publik.

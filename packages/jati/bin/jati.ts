@@ -209,7 +209,13 @@ async function cek(posisi: readonly string[], opsi: Map<string, string | true>):
     );
   }
   console.log(opsi.has("--en") ? hasil.kalimatEn : hasil.kalimat);
-  process.exit(hasil.boleh ? 0 : 1);
+  process.exit(kodeKeluar(hasil.status));
+}
+
+function kodeKeluar(status: string): number {
+  if (status === "asli") return 0;
+  if (status === "penerbit_belum_dikenal") return 3;
+  return 1;
 }
 
 const { posisi, opsi } = parse(process.argv.slice(2));

@@ -259,6 +259,8 @@ The Indonesian sentences below are normative for the reference implementation. `
 
 Rupiah is written with no space and no cents, with a dot as the thousands separator: `Rp300.000`. Dates use the abbreviations Jan, Feb, Mar, Apr, Mei, Jun, Jul, Agu, Sep, Okt, Nov, Des. The section 5 example produces: `Kartu asli. Pemilik: PT Contoh Jaya (fiktif). Berlaku sampai 31 Des 2026.`
 
+The reference command `jati cek` exits 0 only for status `asli`. Status `penerbit_belum_dikenal` exits 3, so a script does not treat it as a pass. Every other card status exits 1. Exit 2 is a command-usage error, not a card result.
+
 "Kartu asli" means three things at once: a key on the trust list signed those fields, the validity window matches, and the id is not in the list the verifier supplied. The sentence does NOT mean the owner has been bound as the named person or company. The name in the sentence is a signed field. Anyone can write that name on a self-issued card. A verifier that uses `--percaya` or `jwksTepercaya` is saying it trusts the key, not that a PSrE, marketplace, or bank bound the name. The sentence does not prove the agent is safe. Copying the card is enough to get the same sentence. A missing list does not produce "Kartu asli". When the verifier supplies `jumlah`, the section 8 rules also decide the result. Without `jumlah`, spending limits are not checked.
 
 The reference implementation also fills a stable `kode`, for example `JATI_OK`, `JATI_EXPIRED`, and `JATI_REVOCATION_UNCHECKED`, plus an informative `kalimatEn`. The code and the English sentence are not normative.

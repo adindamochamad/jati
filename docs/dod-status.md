@@ -33,16 +33,16 @@ Dokumen tata kelola ada: `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CODE
 
 ## Yang belum, dan tidak boleh dicentang
 
-- Belum ada tag git, tag bertanda tangan, GitHub Release, atau DOI. Cap waktu rilis ditahan sampai model kepercayaan tercatat, berkas prompt tidak ada di pohon kerja, dan status AgentPay jujur. Ketiga catatan itu ada; tag tetap belum dibuat.
-- Coverage 90% dan fuzz belum ada.
-- Paket belum diunggah ke npm. `require()` memakai bundel karena `jose` 6 dan `canonicalize` 5 hanya ESM. Workflow `rilis` membangun `dist` lalu menerbitkan dengan provenance, dan belum pernah dijalankan.
+- Tag `v0.1.0` dan GitHub Release adalah cap waktu publik 22 Oktober 2026. Tag ditandatangani hanya bila mesin ini sudah punya kunci penanda. DOI belum ada.
+- Cakupan baris dan cabang `src/` diukur 22 Oktober 2026: 96,52% baris dan 91,54% cabang, di atas ambang 90%. `pnpm --filter @adindamochamad/jati test` gagal bila ambang itu turun. Fuzz belum ada.
+- Paket belum diunggah ke npm selama `NPM_TOKEN` belum ada di secret repositori. `require()` memakai bundel karena `jose` 6 dan `canonicalize` 5 hanya ESM. Workflow `rilis` membangun `dist` lalu menerbitkan dengan provenance bila token itu ada.
 - `jose` dipakai sebagai pustaka EdDSA. Laporan auditnya belum ditautkan. Kripto tidak ditulis sendiri.
 - Quickstart belum diukur stopwatch oleh orang baru. `docs/uji-adopsi.md` masih tabel kosong.
 - Tes Playwright yang memantau jaringan belum ada. Pemeriksaan jaringan di atas adalah sesi peramban manual.
 - Lighthouse dan axe belum dijalankan. Angka aksesibilitas tidak diklaim. Tes tiga detik ke tiga orang non-teknis belum dilakukan.
-- GitHub Pages, Discussions, dan pengaturan secret scanning GitHub belum dikonfirmasi. Gitleaks ada di CI, tetapi belum diulang terhadap seluruh riwayat pada pembaruan ini.
+- GitHub Pages dipasang lewat workflow `halaman` dari `apps/cek/dist`, termasuk `.well-known/jati.json`. Discussions dan secret scanning GitHub belum dikonfirmasi. Gitleaks ada di CI.
 - Workflow npm provenance ada dan belum pernah dijalankan. Jangan menganggap paket sudah terbit.
-- `.env.production` AgentPay masih ada di `main` repositori itu saat diperiksa 21 Oktober 2026 dan 22 Oktober 2026 (750 byte). Riwayatnya belum dihapus dan rotasi kuncinya belum dibuktikan. Jati tidak menautkan AgentPay dan tidak menyediakan demo pembayaran. Lihat `docs/kepercayaan.md`.
+- `.env.production` AgentPay sudah tidak ada di ujung `main` sejak commit `a764553` (22 Oktober 2026). Riwayat commit sebelumnya dan fork `PascalBurume/AgentPay` masih memuat blob yang sama. Force-push belum dilakukan. Jati tidak menautkan AgentPay dan tidak menyediakan demo pembayaran. Lihat `docs/kepercayaan.md`.
 - `docs/implementasi.md` tidak mendaftar pengguna. Lencana di `docs/lencana.md` belum diterbitkan dan bukan sertifikasi.
 - Video demo belum ada.
 - Tes akhir dua orang pada dua sistem operasi belum dilakukan.

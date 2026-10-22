@@ -1,15 +1,9 @@
-import { createRequire } from "node:module";
 import { createServer } from "node:http";
-import { readFile, cp, mkdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { extname, join, normalize, sep } from "node:path";
-import { build } from "esbuild";
+import { bangunHalaman } from "./bangun-halaman.ts";
 
-const require = createRequire(import.meta.url);
-const QRCode = require("qrcode") as {
-  toFile(path: string, teks: string, opsi: { errorCorrectionLevel: "L"; margin: number }): Promise<void>;
-};
-
-const akar = join(process.cwd(), "apps/cek/dist");
+const akar = await bangunHalaman();
 const tipe: Record<string, string> = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
@@ -17,26 +11,6 @@ const tipe: Record<string, string> = {
   ".json": "application/json; charset=utf-8",
   ".png": "image/png",
 };
-
-await mkdir(akar, { recursive: true });
-await build({
-  entryPoints: ["apps/cek/src/utama.ts"],
-  bundle: true,
-  format: "esm",
-  platform: "browser",
-  outfile: join(akar, "aplikasi.js"),
-  logLevel: "silent",
-});
-await cp("apps/cek/index.html", join(akar, "index.html"));
-await cp("apps/cek/gaya.css", join(akar, "gaya.css"));
-await cp("apps/cek/sw.js", join(akar, "sw.js"));
-await cp("fixtures/valid.json", join(akar, "contoh.json"));
-await cp("fixtures/penerbit.public.jwks.json", join(akar, "jwks.json"));
-await cp("fixtures/cabut.json", join(akar, "cabut.json"));
-await QRCode.toFile(join(akar, "contoh-qr.png"), await readFile("fixtures/valid.json", "utf8"), {
-  errorCorrectionLevel: "L",
-  margin: 1,
-});
 
 function jalurAman(url: string): string | undefined {
   let path = "/";

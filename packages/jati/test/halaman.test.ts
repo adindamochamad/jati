@@ -34,7 +34,10 @@ test("halaman cek tetap di origin sendiri", () => {
   assert.match(html, /id="jumlah"/);
   assert.match(html, /id="terpakai"/);
   assert.match(html, /id="arti"/);
-  assert.match(sw, /pathname === "\/cabut\.json"/);
+  assert.match(sw, /pathname\.endsWith\("\/cabut\.json"\)/);
+  assert.match(html, /href="gaya.css"/);
+  assert.match(html, /src="aplikasi.js"/);
+  assert.match(halaman, /fetch\("cabut\.json"/);
   assert.doesNotMatch(sw, /ASET = \[[^\]]*cabut/);
 });
 

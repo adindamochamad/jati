@@ -1,8 +1,9 @@
-const CACHE = "jati-cek-6";
-const ASET = ["/", "/index.html", "/gaya.css", "/aplikasi.js", "/contoh.json", "/jwks.json"];
+const CACHE = "jati-cek-7";
+const NAMA = ["", "index.html", "gaya.css", "aplikasi.js", "contoh.json", "jwks.json"];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASET)).then(() => self.skipWaiting()));
+  const aset = NAMA.map((nama) => new URL(nama, self.registration.scope).href);
+  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(aset)).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", (event) => {
@@ -14,7 +15,7 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
-  if (url.pathname === "/cabut.json") {
+  if (url.pathname.endsWith("/cabut.json")) {
     event.respondWith(fetch(event.request));
     return;
   }

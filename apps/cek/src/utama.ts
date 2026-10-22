@@ -141,7 +141,7 @@ function angkaOpsional(teks: string): number | undefined {
 async function ambilDaftar(): Promise<readonly string[] | undefined> {
   if (!navigator.onLine) return undefined;
   try {
-    const jawab = await fetch("/cabut.json", { cache: "no-store" });
+    const jawab = await fetch("cabut.json", { cache: "no-store" });
     if (!jawab.ok) return undefined;
     return daftarDariBerkas(await jawab.json());
   } catch {
@@ -190,7 +190,7 @@ async function periksa(): Promise<void> {
 }
 
 async function isiContoh(): Promise<void> {
-  const [kartu, jwks] = await Promise.all([fetch("/contoh.json"), fetch("/jwks.json")]);
+  const [kartu, jwks] = await Promise.all([fetch("contoh.json"), fetch("jwks.json")]);
   elemen<HTMLTextAreaElement>("kartu").value = JSON.stringify(await kartu.json(), null, 2);
   elemen<HTMLTextAreaElement>("jwks").value = JSON.stringify(await jwks.json(), null, 2);
 }
@@ -281,7 +281,7 @@ function pasang(): void {
       elemen("bantuan-qr").textContent = salinan[bahasa].qrTidakAda;
     });
   });
-  if ("serviceWorker" in navigator) void navigator.serviceWorker.register("/sw.js");
+  if ("serviceWorker" in navigator) void navigator.serviceWorker.register("sw.js");
 }
 
 pasang();

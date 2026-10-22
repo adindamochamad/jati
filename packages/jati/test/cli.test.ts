@@ -35,7 +35,7 @@ test("kunci-baru, terbit, dan cek", () => {
     assert.equal(terbit.status, 0, terbit.stderr);
     assert.match(terbit.stderr, /Kartu mandiri/);
     const mandiri = jalan(dir, ["cek", "kartu.json", "--sekarang", "2026-10-21T12:00:00+07:00"]);
-    assert.equal(mandiri.status, 1, mandiri.stderr);
+    assert.equal(mandiri.status, 3, mandiri.stderr);
     assert.equal(mandiri.stdout, "Tanda tangan cocok, penerbit belum dikenal.\n");
     const uji = jalan(dir, [
       "terbit",
@@ -52,7 +52,7 @@ test("kunci-baru, terbit, dan cek", () => {
     ]);
     assert.equal(uji.status, 0, uji.stderr);
     const cekUji = jalan(dir, ["cek", "uji.json", "--sekarang", "2026-10-21T12:00:00+07:00"]);
-    assert.equal(cekUji.status, 1);
+    assert.equal(cekUji.status, 3);
     assert.equal(cekUji.stdout, "Tanda tangan cocok, penerbit belum dikenal.\n");
     const cek = jalan(dir, ["cek", "kartu.json", "--percaya", "--sekarang", "2026-10-21T12:00:00+07:00"]);
     assert.equal(cek.status, 0, cek.stderr);
@@ -63,6 +63,10 @@ test("kunci-baru, terbit, dan cek", () => {
     assert.equal(tanpa.stdout, "Tidak pasti. Pencabutan belum bisa dicek.\n");
     const inggris = jalan(dir, ["cek", "kartu.json", "--percaya", "--en", "--sekarang", "2026-10-21T12:00:00+07:00"]);
     assert.equal(inggris.stdout, "Genuine card. Owner: PT Contoh. Valid until 31 Des 2026.\n");
+    const keduanya = jalan(dir, ["cek", "kartu.json", "--percaya", "--ditemukan"]);
+    assert.equal(keduanya.status, 2);
+    const kosong = jalan(dir, []);
+    assert.equal(kosong.status, 2);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

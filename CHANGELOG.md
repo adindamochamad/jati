@@ -10,6 +10,7 @@ Formatnya mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ve
 
 - Spec bagian 7 memisahkan keutuhan, pengenalan penerbit, dan ikatan identitas. Tanpa penerbit yang diikat di luar kartu, Jati adalah format klaim.
 - `jati cek` tidak mempercayai kunci di samping kartu. `--percaya` harus dinyatakan tegas.
+- `jati cek` keluar dengan kode 3 bila penerbit belum dikenal, 0 hanya bila kartu asli.
 - `docs/kepercayaan.md` mencatat arti `Kartu asli`, status kebocoran AgentPay, dan penghapusan berkas prompt dari pohon kerja.
 
 ### Diubah
@@ -45,4 +46,4 @@ Formatnya mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Ve
 
 ### Ditahan
 
-- Publikasi npm, tag bertanda tangan, cap waktu rilis, dan demo pembayaran. Demo pembayaran tetap ditahan selama berkas lingkungan produksi AgentPay masih ada di cabang utamanya. Lihat `docs/kepercayaan.md`.
+- Publikasi npm, selama `NPM_TOKEN` belum ada. Demo pembayaran tetap ditahan selama riwayat atau fork AgentPay masih memuat `.env.production`. Lihat `docs/kepercayaan.md`.

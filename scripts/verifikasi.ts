@@ -80,7 +80,9 @@ try {
     ...(dicabut ? { dicabut } : {}),
   });
   console.log(hasil.kalimat);
-  process.exit(hasil.boleh ? 0 : 1);
+  if (hasil.status === "asli") process.exit(0);
+  if (hasil.status === "penerbit_belum_dikenal") process.exit(3);
+  process.exit(1);
 } catch (galat) {
   console.error(galat instanceof Error ? galat.message : "Verifikasi gagal.");
   process.exit(2);

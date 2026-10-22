@@ -26,6 +26,6 @@ test("perintah tanpa daftar cabut tidak menulis kartu asli", () => {
 
 test("perintah --ditemukan tidak menganggap penerbit dikenal", () => {
   const hasil = jalankan(["--ditemukan", "--sekarang", "2026-10-21T12:00:00+07:00"]);
-  assert.equal(hasil.status, 1);
+  assert.equal(hasil.status, 3);
   assert.equal(hasil.stdout, "Tanda tangan cocok, penerbit belum dikenal.\n");
 });

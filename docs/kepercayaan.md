@@ -14,15 +14,14 @@ Tanpa penerbit yang diikat di luar kartu (PSrE, BSrE, marketplace, bank, atau me
 
 ## AgentPay
 
-Repositori saudara [AgentPay](https://github.com/adindamochamad/AgentPay) memuat `.env.production` di cabang `main` saat dicek 21 Oktober 2026 dan lagi 22 Oktober 2026 (750 byte). Jati tidak memakai rahasia dari repositori itu, tidak menautkannya sebagai produk, dan tidak menyediakan demo pembayaran.
+Pada 22 Oktober 2026, berkas `.env.production` dihapus dari ujung cabang `main` repositori [AgentPay](https://github.com/adindamochamad/AgentPay), commit `a764553`. Isi yang diperiksa adalah templat berkomentar: hostname-nya `host-intern` dan `redis-intern`, bukan layanan publik yang bisa dihubungi dari sini. Nama berkasnya tetap berbahaya, karena orang membaca itu sebagai rahasia produksi.
 
-Tautan dan demo tetap ditahan sampai ketiga hal ini ada buktinya:
+Pengunduhan dari ujung `main` sekarang gagal. Dua hal masih menyisakan berkas yang sama, 750 byte:
 
-1. Berkas itu tidak ada di cabang default.
-2. Riwayat git tidak lagi memuat isinya, atau ada pengumuman bahwa riwayat sudah dibersihkan.
-3. Kunci, sandi, dan rahasia yang pernah ada di berkas itu sudah diganti, dengan catatan rotasi.
+1. Riwayat git AgentPay, lewat commit sebelum `a764553`. Menghapus itu butuh menulis ulang riwayat dan force-push ke `main`. Itu belum dilakukan.
+2. Fork publik [PascalBurume/AgentPay](https://github.com/PascalBurume/AgentPay) masih memuat blob yang sama. Pengelola Jati tidak bisa menghapus fork orang lain.
 
-Jangan menganggap menahan tautan sama dengan menutup kebocoran. Penutupan itu kerja di repositori AgentPay.
+Jati tidak memakai rahasia dari repositori itu, tidak menautkannya sebagai produk, dan tidak menyediakan demo pembayaran. Tautan dan demo tetap ditahan sampai riwayat dan fork itu bersih. Menahan tautan bukan menutup salinan yang masih ada.
 
 ## Berkas prompt
 

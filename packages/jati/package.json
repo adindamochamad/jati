@@ -34,7 +34,7 @@
   "scripts": {
     "build": "pnpm exec tsc -p tsconfig.build.json && node --experimental-strip-types ../../scripts/bangun-cjs.ts",
     "prepublishOnly": "pnpm run build",
-    "test": "node --experimental-strip-types --test test/*.test.ts"
+    "test": "node --experimental-strip-types --test --experimental-test-coverage --test-coverage-lines=90 --test-coverage-branches=90 --test-coverage-include='src/**/*.ts' test/*.test.ts"
   },
   "dependencies": {
     "canonicalize": "5.1.0",

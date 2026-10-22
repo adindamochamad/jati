@@ -76,7 +76,9 @@ Hasil perintah ketiga: `Tanda tangan cocok, penerbit belum dikenal.` Kode keluar
 pnpm exec jati cek kartu.json --percaya
 ```
 
-`--percaya` menyatakan Anda mempercayai kunci di samping kartu. Baru itu kalimatnya `Kartu asli`. Nama pemilik tetap klaim, bukan KTP.
+`--percaya` menyatakan Anda mempercayai kunci di samping kartu. Baru itu kalimatnya `Kartu asli`, dan kode keluarnya 0. Nama pemilik tetap klaim, bukan KTP.
+
+Kode keluar `jati cek`: 0 hanya untuk `Kartu asli`, 3 untuk `penerbit belum dikenal`, 1 untuk hasil kartu yang lain, 2 untuk kesalahan pemakaian.
 
 `kunci-baru` menulis `penerbit.private.jwk.json` dan `penerbit.public.jwks.json`. `terbit` menulis `kartu.json`, `agen.private.jwk.json`, dan `cabut.json` kosong bila berkas itu belum ada. `cek` tidak membaca kunci privat agen. Menyalin `kartu.json` cukup untuk mendapat kalimat yang sama. `cek` tanpa `cabut.json` menulis `Tidak pasti. Pencabutan belum bisa dicek.` Berkas cabut tanpa `jati` `"0.1"` ditolak. Setelah paket diterbitkan, perintah yang sama berjalan lewat `npx @adindamochamad/jati`. Paket itu belum diterbitkan.
 

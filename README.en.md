@@ -76,7 +76,9 @@ The third command prints `Tanda tangan cocok, penerbit belum dikenal.` The exit 
 pnpm exec jati cek kartu.json --percaya
 ```
 
-`--percaya` is an explicit statement that you trust the key next to the card. Only then is the sentence `Kartu asli`. The owner name remains a claim, not an ID card.
+`--percaya` is an explicit statement that you trust the key next to the card. Only then is the sentence `Kartu asli`, and the exit code is 0. The owner name remains a claim, not an ID card.
+
+`jati cek` exit codes: 0 only for `Kartu asli`, 3 for an unrecognized issuer, 1 for every other card result, 2 for a usage error.
 
 `kunci-baru` writes `penerbit.private.jwk.json` and `penerbit.public.jwks.json`. `terbit` writes `kartu.json`, `agen.private.jwk.json`, and an empty `cabut.json` when that file does not yet exist. `cek` does not read the agent private key. Copying `kartu.json` is enough to get the same sentence. `cek` without `cabut.json` prints `Tidak pasti. Pencabutan belum bisa dicek.` A revocation file without `jati` `"0.1"` is rejected. After publication, the same commands run through `npx @adindamochamad/jati`. The package is not published yet.
 
