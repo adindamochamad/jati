@@ -28,7 +28,7 @@ Jangan memindah tag `v0.1.0`. Jangan menulis `git config` permanen untuk penanda
 
 Registry masih 404 sampai secret terisi dan workflow rilis berhasil menerbitkan.
 
-1. Buat **Granular Access Token** di https://www.npmjs.com/ dengan izin publish untuk `@adindamochamad/jati`.
+1. Buat **Granular Access Token** di https://www.npmjs.com/settings/adindamochamad/tokens/granular-access-tokens/new dengan izin **Read and write**, **All packages**, dan **centang Bypass 2FA** (wajib untuk GitHub Actions; tanpa itu publish gagal 403).
 2. Isi secret repositori (stdin, jangan cetak token):
 
    ```bash

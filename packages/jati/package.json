@@ -3,6 +3,11 @@
   "version": "0.1.1",
   "description": "Terbitkan dan verifikasi kartu Jati v0.1, usulan KYA Indonesia.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adindamochamad/jati.git",
+    "directory": "packages/jati"
+  },
   "type": "module",
   "engines": {
     "node": ">=22.18"
