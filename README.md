@@ -118,7 +118,7 @@ Itu menolak kartu kosong, jumlah di atas batas, kartu dicabut, dan kartu kedaluw
 
 | Spec | Pustaka |
 |---|---|
-| 0.1, 22 Oktober 2026 | 0.1.1, belum terbit ke npm |
+| 0.1, 22 Oktober 2026 | 0.1.1, [npm](https://www.npmjs.com/package/@adindamochamad/jati) |
 
 Diuji pada 21 Oktober 2026 dengan `canonicalize` 5.1.0, `jose` 6.2.13, dan Node.js 22.18 atau lebih baru. `canonicalize` mengerjakan RFC 8785. `jose` memverifikasi JWS EdDSA; v0.1 tidak menulis kripto sendiri. Skema tetap di [spec/schema/jati-0.1.json](spec/schema/jati-0.1.json) dan diperiksa oleh kode pustaka, tanpa Ajv di runtime, supaya bundle peramban tetap di bawah 30 KB gzip. Ajv hanya dipakai di pemeriksaan skema pada CI. `pnpm ukuran` mencetak angkanya dan gagal bila batas itu terlewati. Pada 21 Oktober 2026 hasilnya 9859 byte gzip. Vektor kanonisasi RFC 8785 bagian 3.2.4 ada di tes. Kompatibilitas W3C VC 2.0 tidak diklaim. Contoh bentuk VC di spec bagian 13 non-normatif.
 

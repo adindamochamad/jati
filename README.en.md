@@ -118,7 +118,7 @@ It rejects a missing card, an amount over the limit, a revoked card, and an expi
 
 | Spec | Package |
 |---|---|
-| 0.1, 22 October 2026 | 0.1.1, not published to npm yet |
+| 0.1, 22 October 2026 | 0.1.1, [npm](https://www.npmjs.com/package/@adindamochamad/jati) |
 
 Tested on 21 October 2026 with `canonicalize` 5.1.0, `jose` 6.2.13, and Node.js 22.18 or newer. `canonicalize` implements RFC 8785. `jose` verifies EdDSA JWS; v0.1 does not implement cryptography itself. The schema remains [spec/schema/jati-0.1.json](spec/schema/jati-0.1.json) and is checked by library code, without Ajv at runtime, so the browser bundle stays under 30 KB gzip. Ajv is used only by the schema check in CI. `pnpm ukuran` prints the size and fails if that limit is exceeded. On 21 October 2026 the result was 9859 bytes gzip. The RFC 8785 section 3.2.4 canonicalization vector is in the tests. W3C VC 2.0 compatibility is not claimed. The VC-shaped example in spec section 13 is non-normative.
 

@@ -33,7 +33,13 @@ const secret = spawnSync("gh", ["secret", "list", "--repo", "adindamochamad/jati
 const adaNpm = secret.status === 0 && secret.stdout.includes("NPM_TOKEN");
 cek("secret NPM_TOKEN di repositori", adaNpm, "gh secret set NPM_TOKEN --repo adindamochamad/jati (lihat docs/akun-github.md)");
 
-const npm = await fetch("https://registry.npmjs.org/@adindamochamad/jati");
-cek("paket di registry.npmjs.org", npm.ok, adaNpm ? "rerun workflow rilis v0.1.1 setelah secret terisi" : "isi NPM_TOKEN lalu rerun rilis");
+const npm = await fetch("https://registry.npmjs.org/@adindamochamad%2Fjati/0.1.1");
+cek(
+  "paket @adindamochamad/jati@0.1.1 di registry.npmjs.org",
+  npm.ok,
+  adaNpm
+    ? "jalankan workflow rilis (release v0.1.1 atau workflow_dispatch ref=v0.1.1)"
+    : "isi NPM_TOKEN lalu jalankan workflow rilis",
+);
 
 process.exit(gagal > 0 ? 1 : 0);

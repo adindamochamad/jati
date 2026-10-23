@@ -1,6 +1,6 @@
 # Status Definition of Done
 
-Diperbarui 22 Oktober 2026 (WIB). File ini mencatat bukti yang ada, dan hal yang belum boleh dianggap selesai.
+Diperbarui 23 Oktober 2026 (WIB). File ini mencatat bukti yang ada, dan hal yang belum boleh dianggap selesai.
 
 ## Yang sudah ada buktinya
 
@@ -16,7 +16,7 @@ Enam keputusan v0.1 tertulis di `spec/kya-v0.1.md`, `spec/kya-v0.1.en.md`, dan `
 
 Engines tetap `>=22.18` di root dan `packages/jati/package.json`. Node 20 tidak didukung; kegagalan di Node 20 adalah perilaku yang diharapkan karena `canonicalize` 5 menolak Node yang lebih lama.
 
-CLI lokal `kunci-baru`, `terbit`, dan `cek` ada di `packages/jati/bin/jati.ts`. Tes CLI membuat kunci di direktori sementara, memastikan JWKS publik tidak berisi `d`, memastikan `cek` tanpa `--percaya` keluar penerbit belum dikenal, dan memastikan `cek --percaya` tanpa daftar keluar tidak pasti. Paket belum dipublikasikan, jadi `npx @adindamochamad/jati` belum bisa dijalankan orang lain.
+CLI lokal `kunci-baru`, `terbit`, dan `cek` ada di `packages/jati/bin/jati.ts`. Tes CLI membuat kunci di direktori sementara, memastikan JWKS publik tidak berisi `d`, memastikan `cek` tanpa `--percaya` keluar penerbit belum dikenal, dan memastikan `cek --percaya` tanpa daftar keluar tidak pasti. `@adindamochamad/jati@0.1.1` terbit ke npm pada 23 Oktober 2026 lewat workflow `rilis` (provenance GitHub Actions); `npx @adindamochamad/jati` bisa dipakai setelah indeks registry menyelaraskan metadata paket.
 
 Cuplikan Python di `examples/python/cek.py` memeriksa JWS EdDSA dan masa berlaku, lalu keluar status 1 di luar jendela itu. Kalimatnya bukan "Kartu asli". Middleware `tolakTanpaKartu` di `examples/middleware/express.ts` menerima jumlah opsional. Tanpa jumlah, `next()` bukan izin belanja. Fastify bisa memanggil fungsi yang sama. `pnpm demo` menjalankan lima kasus pustaka: tanpa kartu, lewat limit, dicabut, kedaluwarsa, dan diterima. Itu bukan demo AgentPay.
 
@@ -33,15 +33,14 @@ Dokumen tata kelola ada: `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`, `CODE
 
 ## Yang belum, dan tidak boleh dicentang
 
-- Tag `v0.1.0` dan GitHub Release adalah cap waktu publik 22 Oktober 2026. Tag itu tidak ditandatangani dan tidak dipindah. `v0.1.1` ditandatangani dengan kunci SSH. Verified di GitHub menunggu pendaftaran kunci penanda; langkah di `docs/akun-github.md`, cek dengan `node --experimental-strip-types scripts/cek-akun-github.ts`. DOI belum ada.
+- Tag `v0.1.0` dan GitHub Release adalah cap waktu publik 22 Oktober 2026. Tag itu tidak ditandatangani dan tidak dipindah. `v0.1.1` ditandatangani dengan kunci SSH; kunci penanda terdaftar (cek `node --experimental-strip-types scripts/cek-akun-github.ts`). DOI belum ada.
 - Cakupan baris dan cabang `src/` diukur 22 Oktober 2026: 96,52% baris dan 91,54% cabang, di atas ambang 90%. `pnpm --filter @adindamochamad/jati test` gagal bila ambang itu turun. `packages/jati/test/fuzz.test.ts` menjalankan 1000 masukan acak `fast-check` ke `verifikasi` dengan seed tetap `20261022`. Tes subprocess memakai `assertSpawn` agar kegagalan spawn tidak terlihat seperti assertion acak.
-- Paket belum diunggah ke npm (registry 404). Secret `NPM_TOKEN` belum ada di repositori. Token lama di `~/.npmrc` HTTP 401. Setelah token baru: lihat `docs/akun-github.md`, rerun workflow rilis `v0.1.1`. `require()` memakai bundel karena `jose` 6 dan `canonicalize` 5 hanya ESM.
+- `require()` di npm memakai bundel CJS karena `jose` 6 dan `canonicalize` 5 hanya ESM; perilaku itu belum diuji oleh pengguna luar.
 - `jose` dipakai sebagai pustaka EdDSA. Laporan auditnya belum ditautkan. Kripto tidak ditulis sendiri.
 - Quickstart belum diukur stopwatch oleh orang baru. `docs/uji-adopsi.md` masih tabel kosong.
 - Tes Playwright yang memantau jaringan belum ada. Pemeriksaan jaringan di atas adalah sesi peramban manual.
 - axe-core 4.14.0 di Chrome headless, `pnpm uji-akses`, pada https://adindamochamad.github.io/jati/ tanggal 22 Oktober 2026: 0 pelanggaran untuk tag wcag2a, wcag2aa, wcag21a, wcag21aa, dan wcag22aa, pada lebar 360 dan 1280. Lighthouse belum dijalankan. Tes tiga detik ke tiga orang non-teknis belum dilakukan.
 - GitHub Pages hidup di https://adindamochamad.github.io/jati/ sejak 22 Oktober 2026. Kartu contoh lolos di halaman itu. `.well-known/jati.json` adalah kunci contoh, bukan daftar akar. Discussions dan secret scanning GitHub belum dikonfirmasi. Gitleaks ada di CI.
-- Workflow `rilis` sudah dijalankan pada tag `v0.1.0`. Langkah `npm publish` dilewati karena `NPM_TOKEN` kosong. Jangan menganggap paket sudah terbit.
 - `.env.production` AgentPay sudah tidak ada di ujung `main` sejak commit `a764553` (22 Oktober 2026). Blob di riwayat `d74e9f9` berukuran 750 byte dan seluruh isinya komentar: host `host-intern` dan `redis-intern`, bukan nama host publik. Tidak ada kunci asli, jadi riwayat tidak ditulis ulang dan tidak ada kunci yang diganti. Fork `PascalBurume/AgentPay` masih memuat blob yang sama. Jati tidak menautkan AgentPay dan tidak menyediakan demo pembayaran. Lihat `docs/kepercayaan.md`.
 - `docs/implementasi.md` tidak mendaftar pengguna. Lencana di `docs/lencana.md` belum diterbitkan dan bukan sertifikasi.
 - Video demo belum ada.

@@ -45,7 +45,7 @@ Registry masih 404 sampai secret terisi dan workflow rilis berhasil menerbitkan.
 4. Pastikan registry menjawab 200:
 
    ```bash
-   curl -sS -o /dev/null -w '%{http_code}\n' https://registry.npmjs.org/@adindamochamad/jati
+   curl -sS -o /dev/null -w '%{http_code}\n' https://registry.npmjs.org/@adindamochamad%2Fjati/0.1.1
    ```
 
 Baru setelah itu perbarui README bahwa paket terbit. Token lama di `~/.npmrc` yang mengembalikan HTTP 401 tidak dipakai.
