@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "canonicalize": "5.1.0",
-    "jose": "6.2.13"
+    "jose": "6.2.15"
   },
   "devDependencies": {
     "fast-check": "4.10.2"
